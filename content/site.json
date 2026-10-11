@@ -1,9 +1,4 @@
 {
-  "meta": {
-    "title": "結婚相談所サキドリ",
-    "description": "20代30代専門。将来お子さまをお考えの方のための結婚相談所サキドリ。120家庭1200件以上のサポート実績がある産後ドゥーラがカウンセラーです。IBJ正規加盟店。"
-  },
-  "brandTag": "IBJ正規加盟店",
   "hero": {
     "tag": "20代・30代専門",
     "lead": "将来お子さまを\nお考えの方のための",
@@ -64,6 +59,54 @@
       "detail": "無制限／2営業日以内にご返信"
     }
   ],
+  "program": {
+    "name": "サキドリ成婚プログラム",
+    "sub": "",
+    "fees": [
+      {
+        "label": "入会初期費用",
+        "value": "110,000円"
+      },
+      {
+        "label": "月会費",
+        "value": "16,500円"
+      },
+      {
+        "label": "成婚料",
+        "value": "220,000円"
+      },
+      {
+        "label": "お見合い料",
+        "value": "無料"
+      }
+    ],
+    "services": [
+      {
+        "name": "お見合い申込可能人数",
+        "detail": "活動状況に応じて月200名まで"
+      },
+      {
+        "name": "プロフィール添削",
+        "detail": ""
+      },
+      {
+        "name": "目標設定ファーストカウンセリング",
+        "detail": "ご自身の結婚観を明白にして、出会いたいお相手像の軸を確認。成婚までの目標期間を決めます。"
+      },
+      {
+        "name": "目標設定確認カウンセリング",
+        "detail": "上記の進捗確認・軌道修正（60分×月1回）"
+      },
+      {
+        "name": "ワンポイント電話相談",
+        "detail": "お見合いやデートの後に（15分×月4回）"
+      },
+      {
+        "name": "LINE相談",
+        "detail": "無制限／2営業日以内にご返信"
+      }
+    ]
+  },
   "priceNotes": [
     {
       "label": "入会初期費用",
@@ -100,7 +143,7 @@
       "text": ""
     },
     {
-      "title": "プロフィール会議",
+      "title": "プロフィールミーティング",
       "text": ""
     },
     {
@@ -161,15 +204,29 @@
     "email": "sakidori.konkatu@gmail.com",
     "line": "https://line.me/R/ti/p/@853zfnjs"
   },
+  "blogEmpty": "ブログ記事を準備しています。公開まで、もうしばらくお待ちください。",
+  "social": {
+    "line": "https://line.me/R/ti/p/@853zfnjs",
+    "instagram": "",
+    "ameblo": ""
+  },
+  "ibj": {
+    "img": "https://staic.blob.ibjs.ibjapan.com/ibjsite/banner/bnr_2026_no1_5.webp",
+    "href": "https://www.ibjapan.com/",
+    "alt": "結婚相談所サキドリはお見合い数、会員数、成婚者数No.1であるIBJ正規加盟の結婚相談所です"
+  },
   "footer": {
     "address": "",
     "tel": "",
     "hours": ""
   },
-  "ibj": {
-    "href": "https://www.ibjapan.com/",
-    "img": "https://staic.blob.ibjs.ibjapan.com/ibjsite/banner/bnr_2026_no1_5.webp",
-    "alt": "結婚相談所サキドリはお見合い数、会員数、成婚者数No.1であるIBJ正規加盟の結婚相談所です"
+  "brandTag": "IBJ正規加盟店",
+  "images": {
+    "hero": "/images/hero.jpg",
+    "counselor": "/images/counselor.jpg",
+    "seated": "/images/seated.jpg",
+    "eagle": "/images/eagle.jpg",
+    "logo": "/images/logo.png"
   },
   "style": {
     "sp": {
@@ -197,65 +254,8 @@
       "price": 30
     }
   },
-  "blogEmpty": "ブログ記事を準備しています。公開まで、もうしばらくお待ちください。",
-  "program": {
-    "name": "サキドリ成婚プログラム",
-    "sub": "",
-    "fees": [
-      {
-        "label": "入会初期費用",
-        "value": "110,000円"
-      },
-      {
-        "label": "月会費",
-        "value": "16,500円"
-      },
-      {
-        "label": "成婚料",
-        "value": "220,000円"
-      },
-      {
-        "label": "お見合い料",
-        "value": "無料"
-      }
-    ],
-    "services": [
-      {
-        "name": "お見合い申込可能人数",
-        "detail": "活動状況に応じて月200名まで"
-      },
-      {
-        "name": "プロフィール添削",
-        "detail": ""
-      },
-      {
-        "name": "目標設定ファーストカウンセリング",
-        "detail": "ご自身の結婚観を明白にして、出会いたいお相手像の軸を確認。成婚までの目標期間を決めます。"
-      },
-      {
-        "name": "目標設定確認カウンセリング",
-        "detail": "上記の進捗確認・軌道修正（60分×月1回）"
-      },
-      {
-        "name": "ワンポイント電話相談",
-        "detail": "お見合いやデートの後に（15分×月4回）"
-      },
-      {
-        "name": "LINE相談",
-        "detail": "無制限／2営業日以内にご返信"
-      }
-    ]
-  },
-  "images": {
-    "logo": "/images/logo.png",
-    "hero": "/images/hero.jpg",
-    "counselor": "/images/counselor.jpg",
-    "seated": "/images/seated.jpg",
-    "eagle": "/images/eagle.jpg"
-  },
-  "social": {
-    "line": "https://line.me/R/ti/p/@853zfnjs",
-    "instagram": "",
-    "ameblo": ""
+  "meta": {
+    "title": "結婚相談所サキドリ",
+    "description": "20代30代専門。将来お子さまをお考えの方のための結婚相談所サキドリ。120家庭1200件以上のサポート実績がある産後ドゥーラがカウンセラーです。IBJ正規加盟店。"
   }
 }
