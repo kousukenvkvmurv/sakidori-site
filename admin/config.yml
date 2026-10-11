@@ -1,0 +1,219 @@
+# サキドリ 管理画面の設定
+# GitHub のリポジトリ
+backend:
+  name: github
+  repo: kousukenvkvmurv/sakidori-site
+  branch: main
+  commit_messages:
+    create: "{{collection}}「{{slug}}」を作成"
+    update: "{{collection}}「{{slug}}」を更新"
+    delete: "{{collection}}「{{slug}}」を削除"
+    uploadMedia: "画像「{{path}}」を追加"
+    deleteMedia: "画像「{{path}}」を削除"
+
+media_folder: images/uploads
+public_folder: /images/uploads
+
+collections:
+  # ---------------- ブログ ----------------
+  - name: blog
+    label: ブログ
+    label_singular: ブログ記事
+    folder: content/blog
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}{{month}}{{day}}-{{hour}}{{minute}}{{second}}"
+    summary: "{{date}}　{{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: タイトル, widget: string }
+      - { name: date, label: 日付, widget: datetime, format: "YYYY-MM-DD", time_format: false, date_format: "YYYY-MM-DD" }
+      - { name: published, label: サイトに公開する（外すと下書き）, widget: boolean, default: true }
+      - { name: image, label: 記事の写真（任意）, widget: image, required: false }
+      - { name: body, label: 本文, widget: markdown, buttons: [bold, link, heading-two], editor_components: [image] }
+
+  # ---------------- ホームページ ----------------
+  - name: pages
+    label: ホームページ
+    files:
+      - name: site
+        label: ホームページの文章・料金・写真
+        file: content/site.json
+        fields:
+          - name: hero
+            label: トップ
+            widget: object
+            fields:
+              - { name: tag, label: タグ, widget: string }
+              - { name: lead, label: 見出し（上の行）, widget: text, hint: 改行するとサイトでも改行されます }
+              - { name: title, label: 見出し（大きい文字）, widget: text }
+              - { name: sub, label: サブコピー, widget: text }
+              - { name: target, label: 入会対象のご案内（空欄なら非表示）, widget: text, required: false }
+              - { name: chips, label: 小さなラベル, widget: list, field: { name: item, label: ラベル, widget: string } }
+
+          - name: worry
+            label: こんなお悩みありませんか？
+            widget: object
+            fields:
+              - { name: title, label: 見出し, widget: text }
+              - { name: items, label: お悩み, widget: list, field: { name: item, label: お悩み, widget: text } }
+
+          - name: concept
+            label: メッセージ（鷲の写真の上）
+            widget: object
+            fields:
+              - { name: lines, label: 1行ずつ, widget: list, field: { name: line, label: 行, widget: string } }
+
+          - name: feature
+            label: サキドリならできること
+            widget: object
+            fields:
+              - { name: title, label: 見出し, widget: text }
+              - name: steps
+                label: ステップ
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: 見出し, widget: text }
+                  - { name: text, label: 説明, widget: text }
+              - { name: detail, label: 「くわしく」に出る説明, widget: text }
+
+          - name: support
+            label: 活動中のサポート（特徴と活動の流れに表示）
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: 名前, widget: string }
+              - { name: detail, label: 内容, widget: string }
+
+          - name: program
+            label: 料金
+            widget: object
+            fields:
+              - { name: name, label: 名前, widget: string }
+              - { name: sub, label: ひとこと（空欄なら非表示）, widget: text, required: false }
+              - name: fees
+                label: 料金の項目
+                widget: list
+                summary: "{{fields.label}}　{{fields.value}}"
+                fields:
+                  - { name: label, label: 項目, widget: string }
+                  - { name: value, label: 金額（表示したいとおりに。例：16,500円）, widget: string }
+              - name: services
+                label: サポート内容
+                widget: list
+                summary: "{{fields.name}}"
+                fields:
+                  - { name: name, label: 名前, widget: string }
+                  - { name: detail, label: 説明（空欄でも可）, widget: text, required: false }
+
+          - name: priceNotes
+            label: 料金のご説明
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { name: label, label: 項目, widget: string }
+              - { name: text, label: 説明, widget: text }
+
+          - name: flow
+            label: 活動の流れ
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: 名前, widget: string }
+              - { name: text, label: 説明（空欄でも可）, widget: text, required: false }
+          - { name: flowSupportTitle, label: 活動の流れのサポート欄の見出し, widget: string }
+
+          - name: counselor
+            label: 代表カウンセラー
+            widget: object
+            fields:
+              - { name: name, label: お名前, widget: string }
+              - { name: role, label: 肩書き, widget: string }
+              - { name: lead, label: ひとこと, widget: string }
+              - { name: paragraphs, label: 紹介文（段落ごと）, widget: list, field: { name: p, label: 段落, widget: text }, hint: スマホ版のトップには1段落目だけが出ます }
+
+          - name: faq
+            label: よくあるご質問
+            widget: list
+            summary: "{{fields.q}}"
+            fields:
+              - { name: q, label: 質問, widget: string }
+              - { name: a, label: 回答, widget: text }
+
+          - name: contact
+            label: ご予約
+            widget: object
+            fields:
+              - { name: title, label: 見出し, widget: text }
+              - { name: lead, label: 説明, widget: text }
+              - { name: bar, label: スマホの画面下の帯の文字, widget: string }
+              - { name: email, label: 予約用メールアドレス, widget: string }
+              - { name: line, label: LINE公式アカウントのURL, widget: string }
+
+          - { name: blogEmpty, label: ブログ記事がないときの表示, widget: text }
+
+          - name: footer
+            label: フッター（空欄の項目は非表示）
+            widget: object
+            collapsed: true
+            fields:
+              - { name: address, label: 所在地, widget: string, required: false }
+              - { name: tel, label: 電話番号, widget: string, required: false }
+              - { name: hours, label: 受付時間, widget: string, required: false }
+
+          - { name: brandTag, label: ロゴの上の文字, widget: string }
+
+          - name: images
+            label: 写真
+            widget: object
+            collapsed: true
+            fields:
+              - { name: hero, label: トップの写真（縦長・背景が明るいもの）, widget: image }
+              - { name: counselor, label: カウンセラー紹介の写真, widget: image }
+              - { name: seated, label: ご予約欄・紹介詳細の写真, widget: image }
+              - { name: eagle, label: メッセージの背景写真, widget: image }
+              - { name: logo, label: ロゴ（背景透明のPNG）, widget: image }
+
+          - name: style
+            label: 文字サイズ（px）
+            widget: object
+            collapsed: true
+            fields:
+              - name: sp
+                label: スマホ版
+                widget: object
+                fields:
+                  - { name: body, label: 本文, widget: number, value_type: int, min: 11, max: 22 }
+                  - { name: h2, label: 各見出し, widget: number, value_type: int, min: 16, max: 56 }
+                  - { name: heroLead, label: トップ見出し（上の行）, widget: number, value_type: int, min: 12, max: 48 }
+                  - { name: heroTitle, label: トップ見出し（大きい文字）, widget: number, value_type: int, min: 18, max: 96 }
+                  - { name: heroSub, label: トップのサブコピー, widget: number, value_type: int, min: 12, max: 36 }
+                  - { name: concept, label: 鷲の写真のメッセージ, widget: number, value_type: int, min: 12, max: 52 }
+                  - { name: worry, label: お悩みの文字, widget: number, value_type: int, min: 12, max: 36 }
+                  - { name: step, label: ステップの見出し, widget: number, value_type: int, min: 12, max: 40 }
+                  - { name: lead, label: カウンセラーのひとこと, widget: number, value_type: int, min: 12, max: 40 }
+                  - { name: price, label: 料金の金額, widget: number, value_type: int, min: 12, max: 48 }
+              - name: pc
+                label: パソコン版
+                widget: object
+                fields:
+                  - { name: body, label: 本文, widget: number, value_type: int, min: 11, max: 22 }
+                  - { name: h2, label: 各見出し, widget: number, value_type: int, min: 16, max: 56 }
+                  - { name: heroLead, label: トップ見出し（上の行）, widget: number, value_type: int, min: 12, max: 48 }
+                  - { name: heroTitle, label: トップ見出し（大きい文字）, widget: number, value_type: int, min: 18, max: 96 }
+                  - { name: heroSub, label: トップのサブコピー, widget: number, value_type: int, min: 12, max: 36 }
+                  - { name: concept, label: 鷲の写真のメッセージ, widget: number, value_type: int, min: 12, max: 52 }
+                  - { name: worry, label: お悩みの文字, widget: number, value_type: int, min: 12, max: 36 }
+                  - { name: step, label: ステップの見出し, widget: number, value_type: int, min: 12, max: 40 }
+                  - { name: lead, label: カウンセラーのひとこと, widget: number, value_type: int, min: 12, max: 40 }
+                  - { name: price, label: 料金の金額, widget: number, value_type: int, min: 12, max: 48 }
+
+          - name: meta
+            label: 検索結果に出る情報
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: ページの名前, widget: string }
+              - { name: description, label: 説明文, widget: text }

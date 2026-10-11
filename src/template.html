@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>__TITLE__</title>
+<meta name="description" content="__DESC__">
+<meta property="og:type" content="website">
+<meta property="og:title" content="__TITLE__">
+<meta property="og:description" content="__DESC__">
+<meta property="og:image" content="/images/hero.jpg">
+<link rel="icon" href="/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap">
+<style id="css">
+/* Layout: one document, two layouts (phone / PC) chosen by device; content lives in a JSON block that the built-in editor rewrites and republishes. Brand commits to a single light look. */
+:root{
+  color-scheme: light;
+  --mist:#E3ECF0; --sky:#DCE8EE; --paper:#FFFFFF; --ground:#F4F7F8;
+  --ink:#1E2A33; --ink2:#2E4150; --muted:#4F6372; --line:#D5E1E7;
+  --blue:#1F5E9C; --blue-dk:#174A7C; --navy:#1F4F7A; --gold:#E8D27C; --gold-bg:#FFFCEB; --gold-ink:#7A600E; --eyebrow:#4A6E86; --point:#5B6FA6;
+  --green:#06C755; --green-dk:#05A847; --danger:#B4231F;
+  --mincho:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --latin:'Cormorant Garamond','Times New Roman',serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.85}
+body.lock{overflow:hidden}
+img{display:block;max-width:100%}
+a{color:var(--blue)}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.eyebrow{margin:0;font-family:var(--latin);font-size:15px;letter-spacing:.2em;color:var(--eyebrow)}
+.h2{margin:4px 0 0;font-family:var(--mincho);font-weight:800;font-size:25px;line-height:1.5;text-wrap:balance}
+.center{text-align:center}
+.icon-btn{width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;color:var(--ink);cursor:pointer;border-radius:12px;flex:none}
+.edit-pill{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--blue);background:var(--paper);color:var(--blue);font-weight:700;font-size:13px;cursor:pointer}
+.brand{display:flex;flex-direction:column;text-decoration:none;color:var(--ink);line-height:1.2}
+.brand small{font-size:10.5px;font-weight:700;color:var(--blue);letter-spacing:.04em}
+.brand img{height:34px;width:auto;aspect-ratio:371/112;object-fit:contain;align-self:flex-start;margin-top:3px}
+.more-btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 18px 0 22px;border:1px solid var(--blue);border-radius:999px;background:var(--paper);color:var(--blue);font-weight:700;font-size:14px;cursor:pointer;text-decoration:none}
+.more-btn.muted{border-color:#B9CAD4;color:var(--muted);cursor:default}
+.more-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;margin-top:26px}
+.rbtn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none;line-height:1.25;color:#fff}
+.rbtn small{display:block;font-size:11px;font-weight:500;opacity:.92}
+.rbtn-mail{background:var(--blue)} .rbtn-mail:hover,.rbtn-mail:active{background:var(--blue-dk)}
+.rbtn-line{background:var(--green)} .rbtn-line:hover,.rbtn-line:active{background:var(--green-dk)}
+.rbtn svg{flex:none}
+.rv{opacity:.12;transform:translateY(46px) scale(.985);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+/* shared sections */
+.worry{background:var(--sky)}
+.worry-box{margin:28px 0 0;padding:22px 22px;list-style:none;background:#FFFDF3;border-radius:22px;display:flex;flex-direction:column;gap:14px}
+.worry-box li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-family:var(--mincho);font-weight:700;font-size:var(--fs-worry,17px);line-height:1.65;color:var(--ink)}
+.worry-box li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue);margin-top:.7em;justify-self:center}
+.concept{position:relative;overflow:hidden;color:#fff;background:#7FA9CC}
+.concept-bg{position:absolute;left:0;right:0;top:-32%;height:164%;will-change:transform}
+.concept-bg img{width:100%;height:100%;object-fit:cover;object-position:55% 40%}
+.concept::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,62,98,.62),rgba(24,62,98,.28))}
+.concept-in{position:relative;z-index:1}
+.concept p{margin:0;font-family:var(--mincho);font-weight:800;text-shadow:0 2px 12px rgba(10,30,50,.55)}
+.ibj-ban{display:flex;justify-content:center}
+.ibj-img{display:block;width:200px;max-width:100%}
+.ibj-img img{width:200px;height:auto;max-width:100%}
+.ibj-fb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:200px;height:200px;max-width:100%;border:1px solid var(--line);border-radius:14px;background:var(--ground);text-decoration:none;text-align:center;padding:16px}
+.ibj-fb b{font-size:16px;color:var(--ink)}
+.ibj-fb span{font-size:12.5px;color:var(--blue)}
+.medal{width:88px;height:88px;border-radius:50%;background:var(--gold-bg);border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--point);font-family:var(--latin);line-height:1;flex:none}
+.medal span:first-child{font-size:13px}.medal span:last-child{font-size:36px}
+.checks{padding:0;list-style:none;display:flex;gap:10px 24px}
+.checks li{display:flex;align-items:center;gap:10px;font-weight:700}
+.checks li::before{content:"";flex:none;width:16px;height:16px;border-radius:50%;border:4px solid var(--blue)}
+.sup{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.sup li{background:var(--ground);border-radius:12px;padding:12px 14px}
+.sup li b{display:block}
+.sup li span{font-size:13.5px;color:var(--muted)}
+.cmp-wrap{overflow-x:auto}
+.cmp{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.cmp th,.cmp td{border-bottom:1px solid #E3EAEE;padding:9px 6px;text-align:center;vertical-align:middle}
+.cmp thead th{background:var(--ground);line-height:1.4}
+.cmp thead th.feat{background:var(--blue);color:#fff}
+.cmp tbody th{text-align:left;font-weight:500;color:var(--ink2);white-space:nowrap;background:var(--paper)}
+.cmp tr.grp th{background:var(--sky);font-weight:700;color:var(--ink)}
+.cmp tr.money td{font-weight:700}
+.cmp .yes{color:var(--blue);font-weight:700}
+.cmp .no{color:#7F909C}
+.cmp td.feat{background:#F2F7FB}
+.notes{margin:12px 0 0;padding:0;list-style:none;font-size:13px;color:var(--muted);display:grid;gap:8px}
+.notes b{color:var(--ink2)}
+.dot{width:32px;height:32px;border-radius:50%;background:var(--paper);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:var(--latin);font-size:16px;color:var(--blue);flex:none}
+.dot.goal{background:var(--blue);color:#fff}
+.qa{border-top:1px solid var(--line)}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;display:grid;grid-template-columns:28px 1fr 20px;gap:8px;align-items:center;min-height:60px;padding:10px 0;font-weight:700;cursor:pointer}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::before{content:"Q";font-family:var(--latin);font-size:22px;color:var(--blue);text-align:center}
+.qa summary svg{transition:transform .2s;color:var(--muted)}
+.qa details[open] summary svg{transform:rotate(180deg)}
+.qa .a{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:0 0 16px;color:var(--ink2)}
+.qa .a::before{content:"A";font-family:var(--latin);font-size:22px;color:var(--gold-ink);text-align:center;line-height:1.3}
+.qa .a p{margin:0;white-space:pre-wrap}
+.blog-cards{display:grid;gap:12px}
+.blog-card{display:block;width:100%;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 18px;cursor:pointer;color:var(--ink)}
+.blog-card time{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.blog-card b{display:block;font-family:var(--mincho);font-size:17px;line-height:1.5;margin-top:2px}
+.blog-card span{display:block;font-size:13.5px;color:var(--muted);margin-top:4px}
+.copy-box{display:flex;align-items:flex-start;gap:10px;background:var(--ground);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.copy-box code{flex:1 1 auto;min-width:0;font-family:var(--sans);font-size:15px;user-select:all;word-break:break-all;color:var(--ink)}
+.copy-box .mini{min-height:40px;min-width:40px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink2);font-size:13px;font-weight:700;cursor:pointer;flex:none}
+.post-body{line-height:2;color:var(--ink2)}
+.post-body p{margin:0 0 1em}
+.post-body img,.post-img{border-radius:12px;margin:12px 0;width:100%;height:auto}
+.md-h{font-family:var(--mincho);font-size:18px;margin:1.4em 0 .4em}
+.blog-empty{margin:24px auto 0;max-width:560px;text-align:center;background:var(--paper);border:1px dashed #B9CAD4;border-radius:16px;padding:22px 18px;color:var(--muted);font-size:14px}
+.contact{background:var(--navy);color:#fff}
+.contact .eyebrow{color:#BFD5E6}
+.contact .lead{color:#E2ECF3}
+.addr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:rgba(255,255,255,.1);border-radius:12px;padding:10px 12px;font-size:14px}
+.addr code{font-family:var(--sans);user-select:all;word-break:break-all;flex:1 1 auto;min-width:0}
+.addr button{font-size:13px;font-weight:700;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:none;color:#fff;cursor:pointer}
+.ft{background:var(--ground);text-align:center}
+.ft img{height:44px;width:auto;aspect-ratio:371/112;object-fit:contain;margin:0 auto}
+.ft small{display:block;margin-top:6px;font-size:12px;color:var(--blue);font-weight:700}
+.ft address{margin-top:10px;font-style:normal;font-size:13px;color:var(--muted);line-height:1.9}
+.ft .switch{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;font-size:13px;background:none;border:0;color:var(--blue);text-decoration:underline;cursor:pointer}
+.ft .copy{font-size:12px;color:#5D707D}
+.preview-bar{position:sticky;top:0;z-index:60;background:var(--gold-bg);border-bottom:1px solid var(--gold);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--gold-ink)}
+.preview-bar button{min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--gold-ink);background:var(--paper);color:var(--gold-ink);font-weight:700;cursor:pointer}
+
+/* price program */
+.prog{background:var(--paper);border:2px solid var(--blue);border-radius:20px;padding:22px 20px}
+.prog h3{margin:0;font-family:var(--mincho);font-weight:800;font-size:22px;text-align:center}
+.prog-sub{margin:4px 0 10px;font-size:13px;color:var(--muted);text-align:center}
+.fee{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 2px;border-top:1px solid #E3EAEE}
+.fee span{color:var(--muted);font-size:14px}
+.fee strong{font-size:var(--fs-price,24px);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.svc{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.svc li{display:grid;grid-template-columns:20px 1fr;column-gap:8px;background:var(--ground);border-radius:12px;padding:12px 14px}
+.svc li::before{content:"";grid-row:span 2;width:12px;height:12px;margin-top:.55em;border-radius:50%;border:3px solid var(--blue)}
+.svc b{font-size:14.5px}
+.svc span{grid-column:2;font-size:13px;color:var(--muted)}
+.svc-h,.notes-h{margin:0 0 10px;font-weight:700;font-size:15px;color:var(--navy)}
+.notes-h{margin:36px 0 0;font-family:var(--mincho);font-size:20px;text-align:center}
+.pc .prog{max-width:980px;margin:44px auto 0;padding:34px 40px}
+.pc .prog h3{font-size:26px}
+.prog-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px 40px;margin-top:10px}
+.pc .notes{max-width:980px;margin-left:auto;margin-right:auto}
+
+/* ===== phone layout ===== */
+.sp{padding-bottom:calc(118px + env(safe-area-inset-bottom,0px));font-size:var(--fs-body,15px)}
+.pc{font-size:var(--fs-body,15px)}
+.sp .h2,.pc .h2{font-size:var(--fs-h2)}
+.sp .in{padding-inline:20px}
+.sp .sec{padding-block:56px}
+.sp .hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(244,247,248,.96);backdrop-filter:blur(8px);border-bottom:1px solid #DCE5E9;display:flex;align-items:center;justify-content:space-between;gap:8px;height:62px;padding-inline:14px 6px}
+.sp .hd-r{display:flex;align-items:center;gap:4px}
+.sp .hero{background:var(--mist);overflow:hidden}
+.sp .hero-grid{display:grid;grid-template-columns:1fr 40%;align-items:end;min-height:360px}
+.sp .hero-txt{padding:34px 0 30px 20px;position:relative;z-index:1}
+.tag{display:inline-block;background:var(--blue);color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;padding:3px 12px;border-radius:999px}
+.sp .hero h1{margin:14px 0 0;font-family:var(--mincho);font-weight:800;font-size:var(--fs-heroLead,19px);line-height:1.6}
+.sp .hero h1 em{font-style:normal;display:block;font-size:var(--fs-heroTitle,30px);line-height:1.35;margin-top:8px}
+.sp .hero-photo{align-self:stretch;position:relative}
+.sp .hero-photo img{position:absolute;bottom:0;right:-24%;height:100%;width:auto;max-width:none}
+.sp .hero-sub{margin:0;padding:18px 20px 0;font-family:var(--mincho);font-weight:700;font-size:var(--fs-heroSub,16px);line-height:1.75;background:var(--paper)}
+.sp .hero-target{margin:0;padding:10px 20px 0;font-size:13px;color:var(--muted);background:var(--paper)}
+.sp .chips{background:var(--paper);display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:16px 16px 18px;border-bottom:1px solid var(--line);margin:0;list-style:none}
+.sp .chips li{font-size:12.5px;font-weight:700;color:var(--ink2);background:var(--ground);border-radius:999px;padding:4px 12px}
+.sp .concept-in{padding:72px 22px}
+.sp .concept p{font-size:var(--fs-concept,19px);line-height:1.8}
+.sp .concept p+p{margin-top:10px}
+.sp .cando{background:var(--sky)}
+.sp .steps{margin:28px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+.sp .steps li{background:var(--paper);border-radius:18px;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.sp .steps .medal{width:64px;height:64px}
+.sp .steps .medal span:first-child{font-size:11px}.sp .steps .medal span:last-child{font-size:26px}
+.sp .steps h3{margin:0 0 4px;font-family:var(--mincho);font-weight:800;font-size:var(--fs-step,18px);line-height:1.5}
+.sp .steps p{margin:0;font-size:14px;color:#3F5260}
+.sp .checks{margin:16px 0 0;padding:16px 20px;background:var(--paper);border-radius:18px;flex-direction:column;gap:8px}
+.sp .ibj{background:var(--paper);padding:28px 20px}
+.sp .price{background:var(--ground)}
+.sp .plans{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.sp .plan{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
+.sp .plan.feat{border:2px solid var(--blue)}
+.plan-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.plan h3{margin:0;font-family:var(--mincho);font-weight:800;font-size:21px}
+.badge{background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.plan .for{margin:2px 0 8px;font-size:13px;color:var(--muted)}
+.monthly{display:flex;align-items:baseline;gap:6px;margin:0 0 6px}
+.monthly small{font-size:13px;color:var(--muted)}
+.monthly strong{font-size:var(--fs-price,30px);font-variant-numeric:tabular-nums}
+.prow{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #E3EAEE;font-size:14px}
+.prow span:first-child{color:var(--muted)}
+.prow span:last-child{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.sp .note{margin:16px 0 0;font-size:13px;color:var(--muted);text-align:center}
+.sp .flow{background:var(--paper)}
+.sp .tl{margin:26px 0 0;padding:0;list-style:none;position:relative}
+.sp .tl::before{content:"";position:absolute;left:15px;top:16px;bottom:16px;width:2px;background:var(--line)}
+.sp .tl li{position:relative;display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:center;min-height:44px;font-weight:700}
+.sp .counselor{background:var(--mist)}
+.sp .c-photo{margin-top:22px;border-radius:20px;overflow:hidden}
+.sp .c-photo img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:40% 18%}
+.c-name{margin:18px 0 0;font-size:13px;color:var(--muted);font-weight:700}
+.c-name b{display:block;font-family:var(--mincho);font-size:28px;letter-spacing:.12em;color:var(--ink)}
+.c-lead{margin:12px 0 0;font-family:var(--mincho);font-weight:700;font-size:var(--fs-lead,19px);color:var(--blue)}
+.c-txt{margin:10px 0 0;line-height:2;color:var(--ink2)}
+.sp .blog{background:var(--ground)}
+.sp .blog-cards{margin-top:24px}
+.sp .faq{background:var(--paper)}
+.sp .qa{margin-top:24px}
+.sp .reserve{margin-top:22px;display:grid;gap:10px}
+.sp .addr{margin-top:12px}
+.sp .contact .lead{margin:14px 0 0}
+.sp .ft{padding:32px 20px 24px}
+.sp .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--paper);border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(30,42,51,.08);padding:0 12px calc(10px + env(safe-area-inset-bottom,0px))}
+.sp .bar-tab{margin:0 -12px 10px;background:var(--navy);color:#fff;text-align:center;font-size:13px;font-weight:700;letter-spacing:.04em;padding:7px 12px;line-height:1.4}
+.sp .bar-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* overlays */
+.drawer,.sheet,.admin{position:fixed;inset:0;z-index:80;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.drawer{background:var(--ground);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer-top,.sheet-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:60px;padding:env(safe-area-inset-top,0px) 6px 0 18px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
+.drawer nav{display:flex;flex-direction:column;padding:4px 20px 24px}
+.drawer nav a{display:flex;justify-content:space-between;align-items:center;min-height:58px;border-bottom:1px solid #E3EAEE;color:var(--ink);text-decoration:none;font-family:var(--mincho);font-weight:700;font-size:17px}
+.drawer nav a span{font-family:var(--latin);font-size:12px;letter-spacing:.14em;color:var(--eyebrow);font-weight:500}
+.sheet{background:var(--paper);padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+.sheet-top h2{margin:0;font-family:var(--mincho);font-weight:800;font-size:18px}
+.sheet-body{padding:22px 20px 0;max-width:760px;margin:0 auto}
+.sheet-body h3{margin:26px 0 8px;font-family:var(--mincho);font-weight:800;font-size:18px;white-space:pre-line}
+.sheet-body>h3:first-child{margin-top:0}
+.sheet-body p{margin:8px 0 0;color:var(--ink2)}
+.sheet .cmp{min-width:440px;font-size:13px}
+.sheet .cmp-wrap{margin:0 -20px;padding:0 20px}
+.sheet .cmp tbody th{position:sticky;left:0;z-index:1}
+.flow-full{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column}
+.flow-full li{display:grid;grid-template-columns:32px 1fr;gap:12px;padding-bottom:16px;position:relative}
+.flow-full li:not(:last-child)::before{content:"";position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--line)}
+.flow-full b{display:block;font-size:15px;margin-top:4px}
+.flow-full span.d{display:block;font-size:13.5px;color:var(--muted)}
+
+/* ===== PC layout ===== */
+.pc .wrap{max-width:1160px;margin:0 auto;padding-inline:32px}
+.pc .sec{padding-block:100px}
+@media (max-width:900px){.pc .h2{font-size:min(var(--fs-h2),30px)}.pc .hero h1 em{font-size:min(var(--fs-heroTitle),44px)}}
+.pc .eyebrow{font-size:17px}
+.pc .hd{position:sticky;top:0;z-index:40;background:rgba(244,247,248,.95);backdrop-filter:blur(8px);border-bottom:1px solid #DCE5E9}
+.pc .hd .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.pc .brand img{height:40px}
+.pc .nav{display:flex;align-items:center;gap:24px;font-size:14.5px;font-weight:500;flex-wrap:wrap;justify-content:flex-end}
+.pc .nav a{color:var(--ink);text-decoration:none;padding:10px 0}
+.pc .nav a:hover{color:var(--blue)}
+.pc .nav a.cta{background:var(--blue);color:#fff;padding:10px 20px;border-radius:999px}
+.pc .nav a.cta:hover{background:var(--blue-dk)}
+.pc .hero{background:var(--mist);overflow:hidden}
+.pc .hero .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;gap:24px}
+.pc .hero-txt{flex:999 1 520px;min-width:0;padding-block:84px 88px}
+.pc .hero h1{margin:20px 0 0;font-family:var(--mincho);font-weight:800;font-size:var(--fs-heroLead,30px);line-height:1.55}
+.pc .hero h1 em{font-style:normal;display:block;font-size:var(--fs-heroTitle,56px);line-height:1.3;margin-top:10px}
+.pc .hero-sub{margin:26px 0 0;font-family:var(--mincho);font-weight:700;font-size:var(--fs-heroSub,20px);line-height:1.75;color:var(--ink2)}
+.pc .hero-target{margin:14px 0 0;font-size:14px;color:var(--muted);max-width:36em}
+.pc .chips{margin:26px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+.pc .chips li{font-size:13.5px;font-weight:700;color:var(--ink2);background:var(--paper);border-radius:999px;padding:5px 14px}
+.pc .hero-cta{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px}
+.pc .hero-cta .rbtn{min-width:220px;padding:0 24px}
+.pc .hero-img{flex:1 1 300px;display:flex;justify-content:center}
+.pc .hero-img img{width:100%;max-width:400px;height:auto}
+.pc .worry-box{max-width:860px;margin:44px auto 0;padding:34px 40px}
+
+.pc .concept-in{padding:130px 32px;max-width:1160px;margin:0 auto}
+.pc .concept p{font-size:var(--fs-concept,30px);line-height:1.9}
+.pc .cando{background:var(--sky)}
+.pc .grid3{margin-top:52px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:26px}
+.pc .pt{background:var(--paper);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.pc .pt .medal{width:110px;height:110px}
+.pc .pt .medal span:last-child{font-size:44px}
+.pc .pt h3{margin:0;font-family:var(--mincho);font-weight:800;font-size:var(--fs-step,23px);line-height:1.5;white-space:pre-line}
+.pc .pt p{margin:0;font-size:15px;color:#3F5260;text-align:left}
+.pc .checks{margin:34px 0 0;justify-content:center;flex-wrap:wrap}
+.pc .detail{margin:40px auto 0;max-width:900px;background:var(--paper);border-radius:20px;padding:30px 34px}
+.pc .detail p{margin:0;color:var(--ink2)}
+.pc .detail .sup{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));margin-top:18px}
+.pc .ibj{background:var(--paper);padding-block:34px}
+
+.pc .price{background:var(--paper)}
+.pc .tax{margin:8px 0 0;font-size:14px;color:var(--muted)}
+.pc .cmp-wrap{margin-top:44px;border:1px solid var(--line);border-radius:20px}
+.pc .cmp{min-width:680px;font-size:15px}
+.pc .cmp th,.pc .cmp td{padding:13px 12px}
+.pc .cmp thead th{font-family:var(--mincho);font-size:19px;font-weight:800;padding:20px 12px}
+.pc .cmp thead th small{display:block;font-family:var(--sans);font-size:12px;font-weight:700}
+.pc .cmp tbody th{padding-left:24px}
+.pc .cmp tr.money td{font-size:var(--fs-price,19px)}
+.pc .notes{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:10px 32px;font-size:14px;margin-top:24px}
+.pc .note{margin:18px 0 0;text-align:center;color:var(--muted);font-size:14px}
+.pc .flow{background:var(--ground)}
+.pc .fsteps{margin:52px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px}
+.pc .fsteps li{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.pc .fsteps li.start{border-color:var(--gold);background:var(--gold-bg)}
+.pc .fsteps b{font-family:var(--mincho);font-size:17px;line-height:1.5}
+.pc .fsteps span.d{font-size:13px;color:var(--muted)}
+.pc .fsup{max-width:900px;margin:40px auto 0}
+.pc .fsup h3{margin:0;text-align:center;font-family:var(--mincho);font-size:22px}
+.pc .fsup .sup{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));margin-top:18px}
+.pc .fsup .sup li{background:var(--paper)}
+.pc .counselor{background:var(--mist)}
+.pc .counselor .wrap{display:flex;flex-wrap:wrap;align-items:flex-start;gap:56px}
+.pc .c-img{flex:1 1 300px;display:flex;justify-content:center}
+.pc .c-img img{width:100%;max-width:400px;aspect-ratio:4/5;object-fit:cover;object-position:40% 20%;border-radius:24px}
+.pc .c-body{flex:999 1 460px;min-width:0}
+.pc .c-txt{max-width:40em}
+.pc .blog{background:var(--paper)}
+.pc .blog-cards{margin-top:40px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.pc .faq{background:var(--ground)}
+.pc .qa{max-width:820px;margin:44px auto 0}
+.pc .contact .wrap{display:flex;flex-wrap:wrap;gap:56px;align-items:center}
+.pc .ct-l{flex:999 1 460px;min-width:0}
+.pc .ct-l .lead{margin:20px 0 0;max-width:34em}
+.pc .reserve{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;max-width:560px}
+.pc .addr{margin-top:14px;max-width:560px}
+.pc .ct-r{flex:1 1 300px;display:flex;justify-content:center}
+.pc .ct-r img{width:100%;max-width:400px;aspect-ratio:1/1;object-fit:cover;object-position:50% 25%;border-radius:20px}
+.pc .ft .wrap{padding-block:40px}
+
+/* ===== editor ===== */
+.admin{background:var(--ground);z-index:90;padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+.ad-top{position:sticky;top:0;z-index:3;background:var(--navy);color:#fff;padding:env(safe-area-inset-top,0px) 10px 0}
+.ad-row{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:58px;max-width:760px;margin:0 auto}
+.ad-row h2{margin:0;font-size:16px;font-weight:700}
+.ad-row .icon-btn{color:#fff}
+.ad-status{font-size:12px;font-weight:500;opacity:.85;display:block}
+.ad-tabs{display:flex;gap:4px;overflow-x:auto;max-width:760px;margin:0 auto;padding-bottom:8px}
+.ad-tabs button{flex:1 0 auto;min-height:40px;padding:0 14px;border-radius:999px;border:0;background:rgba(255,255,255,.12);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer}
+.ad-tabs button[aria-selected="true"]{background:#fff;color:var(--navy)}
+.ad-body{max-width:760px;margin:0 auto;padding:16px 14px 0;display:flex;flex-direction:column;gap:14px}
+.ad-card{background:var(--paper);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.ad-card>h3{margin:0;font-size:15px;font-weight:700;color:var(--navy)}
+.ad-hint{margin:0;font-size:12.5px;color:var(--muted)}
+.fld{display:flex;flex-direction:column;gap:4px}
+.fld label{font-size:12.5px;font-weight:700;color:var(--ink2)}
+.fld input[type=text],.fld input[type=date],.fld input[type=email],.fld input[type=url],.fld textarea{font:inherit;font-size:16px;padding:10px 12px;border:1px solid #9FB4C2;border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.fld textarea{resize:vertical;min-height:84px;line-height:1.7}
+.fld textarea.big{min-height:320px}
+.fld input[type=range]{width:100%;height:36px;accent-color:var(--blue)}
+.fld output{font-weight:700;color:var(--blue);font-variant-numeric:tabular-nums}
+.chk{display:flex;align-items:center;gap:10px;min-height:40px;font-weight:700;font-size:14px}
+.chk input{width:22px;height:22px}
+.li{border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px;background:#FBFCFD}
+.li-ctl{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.mini{min-height:36px;min-width:40px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink2);font-size:13px;font-weight:700;cursor:pointer}
+.mini.danger{color:var(--danger);border-color:#E7B9B7}
+.mini.danger.armed{background:var(--danger);color:#fff}
+.add{min-height:44px;border-radius:12px;border:1px dashed var(--blue);background:#F4F8FC;color:var(--blue);font-weight:700;cursor:pointer}
+.ad-save{display:flex;gap:10px;position:sticky;bottom:0;z-index:3;background:rgba(244,247,248,.97);padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);margin-top:20px}
+.ad-save>div{display:flex;gap:10px;max-width:760px;margin:0 auto;width:100%}
+.ad-save button{flex:1;min-height:52px;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer}
+.btn-sec{background:#fff;border:1px solid var(--line);color:var(--ink2)}
+.btn-pri{background:var(--blue);border:0;color:#fff}
+.btn-pri[disabled]{background:#9AB0C3;cursor:default}
+.ad-msg{margin:0;border-radius:12px;padding:10px 12px;font-size:13.5px;font-weight:700}
+.ad-msg.ok{background:#E9F6EE;color:#1D6B3A}
+.ad-msg.err{background:#FBECEB;color:var(--danger)}
+.post-item{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;background:#FBFCFD}
+.post-item b{display:block;font-size:15px;line-height:1.5}
+.post-item small{font-size:12px;color:var(--muted)}
+.state{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;margin-left:6px}
+.state.pub{background:#E9F6EE;color:#1D6B3A}
+.state.dr{background:#F0F2F4;color:var(--muted)}
+body{margin:0}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script type="application/json" id="content">__CONTENT__</script>
+<script id="app-js">
+(function(){
+  "use strict";
+  var SKEL = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,sans-serif;background:#fafafa}img{max-width:100%}[hidden]{display:none!important}</style></head><body>';
+  var SAVED = JSON.parse(document.getElementById('content').textContent);
+  var DEFAULT_STYLE = {sp:{body:15,h2:25,heroLead:19,heroTitle:30,heroSub:16,concept:19,worry:17,step:18,lead:19,price:24},pc:{body:15,h2:36,heroLead:30,heroTitle:56,heroSub:20,concept:30,worry:21,step:23,lead:22,price:30}};
+  if (!SAVED.program) SAVED.program = { name: 'サキドリ成婚プログラム', sub: '', fees: [], services: [] };
+  if (!SAVED.style) SAVED.style = clone(DEFAULT_STYLE);
+  if (!SAVED.ibj) SAVED.ibj = {href:'https://www.ibjapan.com/',img:'',alt:''};
+  if (SAVED.blogEmpty == null) SAVED.blogEmpty = '';
+  var IMG = SAVED.images || {logo:'/images/logo.png',hero:'/images/hero.jpg',counselor:'/images/counselor.jpg',seated:'/images/seated.jpg',eagle:'/images/eagle.jpg'};
+  var DRAFT_KEY = 'sakidori-draft', VIEW_KEY = 'sakidori-view';
+
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+  function br(s){ return esc(s).replace(/\n/g, '<br>'); }
+  function getPath(o, p){ return p.split('.').reduce(function(a, k){ return a == null ? a : a[k]; }, o); }
+  function setPath(o, p, v){ var ks = p.split('.'), last = ks.pop(); var t = ks.reduce(function(a, k){ return a[k]; }, o); t[last] = v; }
+  function today(){ var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+  function fmtDate(s){ var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? (+m[1]) + '年' + (+m[2]) + '月' + (+m[3]) + '日' : esc(s); }
+  function store(k, v){ try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch(e){} }
+  function load(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+
+  function detectView(){
+    var pref = load(VIEW_KEY); if (pref === 'sp' || pref === 'pc') return pref;
+    var ua = navigator.userAgent || '';
+    var mobile = (navigator.userAgentData && navigator.userAgentData.mobile) || /iPhone|iPod|Android.+Mobile|Windows Phone|BlackBerry|Opera Mini|IEMobile/i.test(ua);
+    if (!mobile && window.matchMedia && matchMedia('(max-width: 640px)').matches) mobile = true;
+    return mobile ? 'sp' : 'pc';
+  }
+
+  var S = { isOwner: false, c: clone(SAVED), view: detectView(), menu: false, sheet: null, admin: false, tab: 'blog', postId: null, dirty: false, canEdit: false, art: null, saving: false, msg: null, arm: null };
+
+  var app = document.getElementById('app');
+  app.innerHTML = '<div id="page"></div><div id="layer"></div>';
+  var pageEl = document.getElementById('page'), layerEl = document.getElementById('layer');
+
+  /* ---------- icons ---------- */
+  var IC = {
+    menu: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+    close: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    next: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+    down: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+    mail: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+    line: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 4C7 4 3 7.2 3 11.2c0 3.5 3.1 6.4 7.3 7l-.6 2.6c-.1.4.3.7.7.5L14 18c4.2-.7 7-3.5 7-6.8C21 7.2 17 4 12 4z"/></svg>',
+    pen: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>'
+  };
+
+  /* ---------- shared pieces ---------- */
+  var MAIL_SUBJECT = '無料カウンセリングの予約', MAIL_BODY = 'お名前：\nご希望の日時：\nオンライン／対面：\nご相談内容：\n';
+  function mailto(c){ return 'mailto:' + encodeURIComponent(c.contact.email).replace('%40','@') + '?subject=' + encodeURIComponent(MAIL_SUBJECT) + '&body=' + encodeURIComponent(MAIL_BODY); }
+  function framed(){ try { return window.self !== window.top; } catch(e){ return true; } }
+  function directMail(){ return !framed() && S.view === 'sp'; }
+  function reserveBtns(c){
+    return '<a class="rbtn rbtn-mail" data-act="mail" href="' + esc(mailto(c)) + '">' + IC.mail + '<span>メールで予約<small>予約用の文面つき</small></span></a>' +
+      '<a class="rbtn rbtn-line" href="' + esc(c.contact.line) + '" target="_blank" rel="noopener">' + IC.line + '<span>LINEで予約<small>公式アカウント</small></span></a>';
+  }
+  function md(src){
+    var blocks = String(src || '').replace(/\r/g, '').split(/\n{2,}/);
+    function inline(t){
+      t = esc(t);
+      t = t.replace(/!\[([^\]]*)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g, '<img src="$2" alt="$1" loading="lazy">');
+      t = t.replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return t.replace(/\n/g, '<br>');
+    }
+    return blocks.map(function(b){
+      var m = /^(#{1,3})\s+(.*)$/.exec(b.trim());
+      if (m) return '<h4 class="md-h">' + inline(m[2]) + '</h4>';
+      if (/^\s*$/.test(b)) return '';
+      return '<p>' + inline(b.trim()) + '</p>';
+    }).join('');
+  }
+  function posts(c){ return (c.posts || []).filter(function(p){ return p.published; }).sort(function(a, b){ return (b.date || '').localeCompare(a.date || ''); }); }
+  function excerpt(s){ s = String(s || '').replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/[#*]/g, '').replace(/\s+/g, ' '); return s.length > 60 ? s.slice(0, 60) + '…' : s; }
+  function blogCards(list){ return '<div class="blog-cards">' + list.map(function(p){ return '<button type="button" class="blog-card" data-rv data-act="post" data-id="' + esc(p.id) + '"><time>' + fmtDate(p.date) + '</time><b>' + esc(p.title || '無題') + '</b><span>' + esc(excerpt(p.body)) + '</span></button>'; }).join('') + '</div>'; }
+  function blogEmpty(c){ return '<p class="blog-empty" data-rv>' + esc(c.blogEmpty) + '</p>'; }
+  function cell(v, feat){ var cls = v === '✓' ? 'yes' : (v === '—' || v === '-' ? 'no' : ''); if (feat) cls += ' feat'; return '<td class="' + cls.trim() + '">' + br(v) + '</td>'; }
+  function program(c, pc){
+    var p = c.program || { fees: [], services: [] };
+    var fees = '<div class="fees">' + p.fees.map(function(f){ return '<div class="fee"><span>' + esc(f.label) + '</span><strong>' + esc(f.value) + '</strong></div>'; }).join('') + '</div>';
+    var svc = '<ul class="svc">' + p.services.map(function(s){ return '<li><b>' + esc(s.name) + '</b>' + (s.detail ? '<span>' + esc(s.detail) + '</span>' : '') + '</li>'; }).join('') + '</ul>';
+    return '<article class="prog" data-rv><h3>' + esc(p.name) + '</h3>' + (p.sub ? '<p class="prog-sub">' + esc(p.sub) + '</p>' : '') + (pc ? '<div class="prog-cols"><div>' + fees + '</div><div><p class="svc-h">サポート内容</p>' + svc + '</div></div>' : fees) + '</article>';
+  }
+  function services(c){ var p = c.program || { services: [] }; return '<ul class="svc">' + p.services.map(function(s){ return '<li><b>' + esc(s.name) + '</b>' + (s.detail ? '<span>' + esc(s.detail) + '</span>' : '') + '</li>'; }).join('') + '</ul>'; }
+  function priceNotes(c){ return '<ul class="notes">' + c.priceNotes.map(function(n){ return '<li><b>' + esc(n.label) + '：</b>' + esc(n.text) + '</li>'; }).join('') + '</ul>'; }
+  function supList(c){ return '<ul class="sup">' + c.support.map(function(s){ return '<li><b>' + esc(s.name) + '</b><span>' + esc(s.detail) + '</span></li>'; }).join('') + '</ul>'; }
+  function faqList(c){ return '<div class="qa">' + c.faq.map(function(f){ return '<details data-rv><summary>' + esc(f.q) + IC.down + '</summary><div class="a"><p>' + esc(f.a) + '</p></div></details>'; }).join('') + '</div>'; }
+  function concept(c){ return '<section class="concept" id="concept" aria-label="メッセージ"><div class="concept-bg" data-parallax><img src="' + IMG.eagle + '" alt=""></div><div class="concept-in">' + c.concept.lines.map(function(l){ return '<p data-rv>' + esc(l) + '</p>'; }).join('') + '</div></section>'; }
+  function ibjBanner(c){ var b = c.ibj || {}; return '<div class="ibj-ban" data-rv><a class="ibj-img" href="' + esc(b.href) + '" target="_blank" rel="noopener"><img src="' + esc(b.img) + '" alt="' + esc(b.alt) + '" width="200" height="200" border="0" onerror="this.parentNode.hidden=true;this.parentNode.nextElementSibling.hidden=false"></a><a class="ibj-fb" href="' + esc(b.href) + '" target="_blank" rel="noopener" hidden><b>IBJ正規加盟店</b><span>日本結婚相談所連盟（IBJ）の公式サイトへ</span></a></div>'; }
+  function footerAddr(c){ var f = c.footer, parts = []; if (f.address) parts.push(esc(f.address)); if (f.tel) parts.push('TEL ' + esc(f.tel) + (f.hours ? '　受付時間 ' + esc(f.hours) : '')); else if (f.hours) parts.push('受付時間 ' + esc(f.hours)); return parts.length ? '<address>' + parts.join('<br>') + '</address>' : ''; }
+  function previewBar(){ return ''; }
+  function editPill(){ return ''; }
+
+  /* ---------- phone ---------- */
+  function fsVars(st){ st = st || {}; return Object.keys(st).map(function(k){ return '--fs-' + k + ':' + (+st[k]) + 'px'; }).join(';'); }
+  function renderSP(c){
+    var ps = posts(c);
+    return previewBar() +
+    '<div class="sp" style="' + fsVars(c.style && c.style.sp) + '">' +
+    '<header class="hd"><a class="brand" href="#top"><small>' + esc(c.brandTag) + '</small><img src="' + IMG.logo + '" alt="結婚相談所サキドリ"></a><div class="hd-r">' + editPill() + '<button class="icon-btn" type="button" data-act="menu" aria-label="メニューを開く" aria-expanded="false">' + IC.menu + '</button></div></header>' +
+    '<main>' +
+    '<section class="hero" id="top"><div class="hero-grid"><div class="hero-txt"><span class="tag">' + esc(c.hero.tag) + '</span><h1>' + br(c.hero.lead) + '<em>' + br(c.hero.title) + '</em></h1></div><div class="hero-photo"><img data-drift src="' + IMG.hero + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '"></div></div></section>' +
+    '<p class="hero-sub">' + br(c.hero.sub) + '</p>' + (c.hero.target ? '<p class="hero-target">' + esc(c.hero.target) + '</p>' : '') +
+    '<ul class="chips">' + c.hero.chips.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+    '<section class="sec worry" id="worry"><div class="in"><div class="center" data-rv><p class="eyebrow">WORRY</p><h2 class="h2">' + br(c.worry.title) + '</h2></div><ul class="worry-box" data-rv>' + c.worry.items.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div></section>' +
+    concept(c) +
+    '<section class="sec cando" id="feature"><div class="in"><div class="center" data-rv><p class="eyebrow">FEATURE</p><h2 class="h2">' + br(c.feature.title) + '</h2></div><ol class="steps">' +
+      c.feature.steps.map(function(s, i){ return '<li data-rv><div class="medal" aria-hidden="true"><span>step</span><span>' + (i+1) + '</span></div><div><h3>' + br(s.title) + '</h3><p>' + esc(s.text) + '</p></div></li>'; }).join('') +
+    '</ol><div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="feature">くわしくはこちら' + IC.next + '</button></div></div></section>' +
+    '<section class="sec price" id="price"><div class="in"><div class="center" data-rv><p class="eyebrow">PRICE</p><h2 class="h2">料金</h2></div>' + program(c, false) + '<div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="price">サポート内容・くわしくはこちら' + IC.next + '</button></div></div></section>' +
+    '<section class="sec flow" id="flow"><div class="in"><div class="center" data-rv><p class="eyebrow">FLOW</p><h2 class="h2">活動の流れ</h2></div><ol class="tl">' +
+      c.flow.map(function(f, i){ return '<li data-rv><span class="dot' + (i === c.flow.length - 1 ? ' goal' : '') + '">' + (i+1) + '</span><span>' + esc(f.title) + '</span></li>'; }).join('') +
+    '</ol><div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="flow">くわしくはこちら' + IC.next + '</button></div></div></section>' +
+    '<section class="sec counselor" id="counselor"><div class="in"><p class="eyebrow">COUNSELOR</p><h2 class="h2">代表カウンセラー</h2><div class="c-photo" data-rv><img src="' + IMG.counselor + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '" loading="lazy"></div><p class="c-name">' + esc(c.counselor.role) + '<b>' + esc(c.counselor.name) + '</b></p><p class="c-lead">' + esc(c.counselor.lead) + '</p><p class="c-txt">' + esc(c.counselor.paragraphs[0] || '') + '</p>' +
+    '<div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="counselor">くわしくはこちら' + IC.next + '</button>' + '' + '</div></div></section>' +
+    '<section class="sec blog" id="blog"><div class="in"><div class="center" data-rv><p class="eyebrow">BLOG</p><h2 class="h2">ブログ</h2></div>' + (ps.length ? blogCards(ps.slice(0, 5)) : blogEmpty(c)) + (ps.length > 5 ? '<div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="blog">記事一覧' + IC.next + '</button></div>' : '') + '</div></section>' +
+    '<section class="sec faq" id="faq"><div class="in"><div class="center" data-rv><p class="eyebrow">FAQ</p><h2 class="h2">よくあるご質問</h2></div>' + faqList(c) + '</div></section>' +
+    '<section class="sec contact" id="contact"><div class="in"><p class="eyebrow">CONTACT</p><h2 class="h2">' + br(c.contact.title) + '</h2><p class="lead">' + esc(c.contact.lead) + '</p><div class="reserve">' + reserveBtns(c) + '</div><div class="addr"><code id="mailAddr">' + esc(c.contact.email) + '</code><button type="button" data-act="copy">コピー</button></div></div></section>' +
+    '</main>' +
+    '<footer class="ft"><img src="' + IMG.logo + '" alt="結婚相談所サキドリ"><small>' + esc(c.brandTag) + '</small>' + footerAddr(c) + '<button type="button" class="switch" data-act="view" data-id="pc">パソコン版で表示する</button><div class="copy">© 結婚相談所サキドリ</div></footer>' +
+    '<div class="bar" role="region" aria-label="' + esc(c.contact.bar) + '"><p class="bar-tab">' + esc(c.contact.bar) + '</p><div class="bar-btns">' + reserveBtns(c) + '</div></div>' +
+    '</div>';
+  }
+
+  /* ---------- PC ---------- */
+  function renderPC(c){
+    var ps = posts(c);
+    return previewBar() +
+    '<div class="pc" style="' + fsVars(c.style && c.style.pc) + '">' +
+    '<header class="hd"><div class="wrap"><a class="brand" href="#top"><small>' + esc(c.brandTag) + '</small><img src="' + IMG.logo + '" alt="結婚相談所サキドリ"></a><nav class="nav" aria-label="メインメニュー"><a href="#feature">サキドリの特徴</a><a href="#price">料金</a><a href="#flow">活動の流れ</a><a href="#counselor">カウンセラー紹介</a>' + '<a href="#blog">ブログ</a>' + '<a href="#faq">よくあるご質問</a><a class="cta" href="#contact">無料カウンセリングのご予約</a>' + editPill() + '</nav></div></header>' +
+    '<main>' +
+    '<section class="hero" id="top"><div class="wrap"><div class="hero-txt"><span class="tag">' + esc(c.hero.tag) + '</span><h1>' + br(c.hero.lead) + '<em>' + br(c.hero.title) + '</em></h1><p class="hero-sub">' + br(c.hero.sub) + '</p>' + (c.hero.target ? '<p class="hero-target">' + esc(c.hero.target) + '</p>' : '') + '<ul class="chips">' + c.hero.chips.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul><div class="hero-cta">' + reserveBtns(c) + '</div></div><div class="hero-img"><img data-drift src="' + IMG.hero + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '"></div></div></section>' +
+    '<section class="sec worry center" id="worry"><div class="wrap"><p class="eyebrow">WORRY</p><h2 class="h2">' + esc(c.worry.title.replace(/\n/g, '')) + '</h2><ul class="worry-box" style="text-align:left" data-rv>' + c.worry.items.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div></section>' +
+    concept(c) +
+    '<section class="sec cando" id="feature"><div class="wrap"><div class="center" data-rv><p class="eyebrow">FEATURE</p><h2 class="h2">' + esc(c.feature.title.replace(/\n/g, '')) + '</h2></div><div class="grid3">' +
+      c.feature.steps.map(function(s, i){ return '<article class="pt" data-rv><div class="medal" aria-hidden="true"><span>step</span><span>' + (i+1) + '</span></div><h3>' + esc(s.title) + '</h3><p>' + esc(s.text) + '</p></article>'; }).join('') +
+    '</div><div class="detail" data-rv><p>' + esc(c.feature.detail) + '</p>' + supList(c) + '</div></div></section>' +
+    '<section class="sec price" id="price"><div class="wrap"><div class="center" data-rv><p class="eyebrow">PRICE</p><h2 class="h2">料金</h2></div>' + program(c, true) + '<h3 class="notes-h">料金のご説明</h3>' + priceNotes(c) + '</div></section>' +
+    '<section class="sec flow" id="flow"><div class="wrap"><div class="center" data-rv><p class="eyebrow">FLOW</p><h2 class="h2">活動の流れ</h2></div><ol class="fsteps">' +
+      c.flow.map(function(f, i){ return '<li data-rv' + (/活動開始/.test(f.title) ? ' class="start"' : '') + '><span class="dot' + (i === c.flow.length - 1 ? ' goal' : '') + '">' + (i+1) + '</span><b>' + esc(f.title) + '</b>' + (f.text ? '<span class="d">' + esc(f.text) + '</span>' : '') + '</li>'; }).join('') +
+    '</ol><div class="fsup"><h3>' + esc(c.flowSupportTitle) + '</h3>' + supList(c) + '</div></div></section>' +
+    '<section class="sec counselor" id="counselor"><div class="wrap"><div class="c-img" data-rv><img src="' + IMG.counselor + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '" loading="lazy"></div><div class="c-body"><p class="eyebrow">COUNSELOR</p><h2 class="h2">代表カウンセラー</h2><p class="c-name">' + esc(c.counselor.role) + '<b>' + esc(c.counselor.name) + '</b></p><p class="c-lead">' + esc(c.counselor.lead) + '</p>' + c.counselor.paragraphs.map(function(p){ return '<p class="c-txt">' + esc(p) + '</p>'; }).join('') + '' + '</div></div></section>' +
+    '<section class="sec blog" id="blog"><div class="wrap"><div class="center" data-rv><p class="eyebrow">BLOG</p><h2 class="h2">ブログ</h2></div>' + (ps.length ? blogCards(ps.slice(0, 6)) : blogEmpty(c)) + (ps.length > 6 ? '<div class="more-row" style="justify-content:center"><button class="more-btn" type="button" data-act="sheet" data-id="blog">記事一覧' + IC.next + '</button></div>' : '') + '</div></section>' +
+    '<section class="sec faq" id="faq"><div class="wrap"><div class="center" data-rv><p class="eyebrow">FAQ</p><h2 class="h2">よくあるご質問</h2></div>' + faqList(c) + '</div></section>' +
+    '<section class="sec contact" id="contact"><div class="wrap"><div class="ct-l"><p class="eyebrow">CONTACT</p><h2 class="h2">' + br(c.contact.title) + '</h2><p class="lead">' + esc(c.contact.lead) + '</p><div class="reserve">' + reserveBtns(c) + '</div><div class="addr"><code id="mailAddr">' + esc(c.contact.email) + '</code><button type="button" data-act="copy">コピー</button></div></div><div class="ct-r" data-rv><img src="' + IMG.seated + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '" loading="lazy"></div></div></section>' +
+    '</main>' +
+    '<footer class="ft"><div class="wrap"><img src="' + IMG.logo + '" alt="結婚相談所サキドリ"><small>' + esc(c.brandTag) + '</small>' + footerAddr(c) + '<button type="button" class="switch" data-act="view" data-id="sp">スマホ版で表示する</button><div class="copy">© 結婚相談所サキドリ</div></div></footer>' +
+    '</div>';
+  }
+
+  /* ---------- overlays ---------- */
+  function sheetFrame(title, body){ return '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + esc(title) + '"><div class="sheet-top"><h2>' + esc(title) + '</h2><button class="icon-btn" type="button" data-act="close" aria-label="閉じる">' + IC.close + '</button></div><div class="sheet-body">' + body + '</div></div>'; }
+  function renderSheet(c){
+    var id = S.sheet;
+    if (id === 'feature') return sheetFrame('サキドリの特徴', c.feature.steps.map(function(s, i){ return '<h3>step' + (i+1) + '　' + esc(s.title.replace(/\n/g, ' ')) + '</h3><p>' + esc(s.text) + '</p>'; }).join('') + '<h3>目標設定ファーストカウンセリング</h3><p>' + esc(c.feature.detail) + '</p><h3>活動中のサポート</h3>' + supList(c));
+    if (id === 'price') return sheetFrame('料金（税込）', '<h3>' + esc(c.program.name) + '</h3>' + program(c, false).replace(' data-rv', '') + '<h3>サポート内容</h3>' + services(c) + '<h3>料金のご説明</h3>' + priceNotes(c));
+    if (id === 'flow') return sheetFrame('活動の流れ', '<ol class="flow-full">' + c.flow.map(function(f, i){ return '<li><span class="dot' + (i === c.flow.length - 1 ? ' goal' : '') + '">' + (i+1) + '</span><div><b>' + esc(f.title) + '</b>' + (f.text ? '<span class="d">' + esc(f.text) + '</span>' : '') + '</div></li>'; }).join('') + '</ol><h3>' + esc(c.flowSupportTitle) + '</h3>' + supList(c));
+    if (id === 'counselor') return sheetFrame('カウンセラー紹介', '<img src="' + IMG.seated + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 25%;border-radius:16px"><h3 style="margin-top:20px">' + esc(c.counselor.lead) + '</h3>' + c.counselor.paragraphs.map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '<p style="margin-top:18px;font-weight:700">' + esc(c.counselor.role) + '　' + esc(c.counselor.name) + '</p>');
+    if (id === 'blog') return sheetFrame('ブログ', blogCards(posts(c)));
+    if (id === 'mail') return sheetFrame('メールで予約', '<p style="margin-top:0">下の宛先に、予約用の文面を貼り付けて送ってください。「メールアプリを開く」を押すと、宛先と文面が入った状態で開きます。</p><h3>宛先</h3><div class="copy-box"><code id="mailAddrS">' + esc(c.contact.email) + '</code><button type="button" class="mini" data-act="copy" data-target="mailAddrS">コピー</button></div><h3>件名</h3><div class="copy-box"><code id="mailSubj">' + esc(MAIL_SUBJECT) + '</code><button type="button" class="mini" data-act="copy" data-target="mailSubj">コピー</button></div><h3>予約用の文面</h3><div class="copy-box"><code id="mailBody" style="white-space:pre-wrap">' + esc(MAIL_BODY) + '</code><button type="button" class="mini" data-act="copy" data-target="mailBody">コピー</button></div><p style="margin-top:20px"><a class="rbtn rbtn-mail" href="' + esc(mailto(c)) + '">' + IC.mail + '<span>メールアプリを開く</span></a></p>');
+    if (id && id.indexOf('post:') === 0) { var p = (c.posts || []).find(function(x){ return x.id === id.slice(5); }); if (p) return sheetFrame('ブログ', '<p style="margin:0;font-size:13px;color:var(--muted)">' + fmtDate(p.date) + '</p><h3 style="margin-top:4px;font-size:22px">' + esc(p.title || '無題') + '</h3>' + (p.image ? '<img class="post-img" src="' + esc(p.image) + '" alt="">' : '') + '<div class="post-body">' + md(p.body) + '</div>'); }
+    return '';
+  }
+  function renderDrawer(c){
+    var ps = posts(c);
+    var items = [['#top','ホーム','HOME'],['#feature','サキドリの特徴','FEATURE'],['#price','料金','PRICE'],['#flow','活動の流れ','FLOW'],['#counselor','カウンセラー紹介','COUNSELOR']];
+    items.push(['#blog','ブログ','BLOG']);
+    items.push(['#faq','よくあるご質問','FAQ'],['#contact','無料カウンセリングのご予約','CONTACT']);
+    return '<div class="drawer" role="dialog" aria-modal="true" aria-label="メニュー"><div class="drawer-top"><span class="brand"><small>' + esc(c.brandTag) + '</small><img src="' + IMG.logo + '" alt=""></span><button class="icon-btn" type="button" data-act="close" aria-label="メニューを閉じる">' + IC.close + '</button></div><nav aria-label="メインメニュー">' + items.map(function(x){ return '<a href="' + x[0] + '" data-act="nav">' + x[1] + '<span>' + x[2] + '</span></a>'; }).join('') + '</nav></div>';
+  }
+
+  /* ---------- render ---------- */
+  function renderPage(){ pageEl.innerHTML = S.view === 'sp' ? renderSP(S.c) : renderPC(S.c); setupFx(); }
+  function renderLayer(keepScroll){
+    var prev = keepScroll && layerEl.firstChild ? layerEl.firstChild.scrollTop : 0;
+    var html = S.sheet ? renderSheet(S.c) : S.menu ? renderDrawer(S.c) : '';
+    layerEl.innerHTML = html;
+    document.body.classList.toggle('lock', !!html);
+    if (html && layerEl.firstChild) { layerEl.firstChild.scrollTop = prev; if (!keepScroll) { var f = layerEl.querySelector('[data-act="close"]'); if (f) f.focus({ preventScroll: true }); } }
+  }
+  /* ---------- effects ---------- */
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io = null, pxEls = [], ticking = false, heroImg = null;
+  function setupFx(){
+    pxEls = [].slice.call(pageEl.querySelectorAll('[data-parallax]'));
+    if (reduce || !('IntersectionObserver' in window)) return;
+    if (io) io.disconnect();
+    io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    pageEl.querySelectorAll('[data-rv]').forEach(function(el){ var r = el.getBoundingClientRect(); if (r.top < innerHeight) return; var sib = el.parentNode ? [].filter.call(el.parentNode.children, function(x){ return x.hasAttribute('data-rv'); }) : []; var k = sib.indexOf(el); if (k > 0) el.style.transitionDelay = Math.min(k * 0.1, 0.5) + 's'; el.classList.add('rv'); io.observe(el); });
+    heroImg = pageEl.querySelector('[data-drift]');
+    onScroll();
+  }
+  function onScroll(){
+    if (reduce || ticking) return; ticking = true;
+    requestAnimationFrame(function(){ ticking = false; var vh = innerHeight; if (heroImg) { var y = Math.min(scrollY, innerHeight); heroImg.style.transform = 'translate3d(0,' + (y * 0.18).toFixed(1) + 'px,0)'; }
+      pxEls.forEach(function(el){ var r = el.parentNode.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return; var p = (r.top + r.height / 2 - vh / 2) / (vh + r.height); el.style.transform = 'translate3d(0,' + (p * -38).toFixed(2) + '%,0)'; }); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+
+  /* ---------- events ---------- */
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-act]'); if (!t) return;
+    var a = t.getAttribute('data-act'), id = t.getAttribute('data-id');
+    if (a !== 'del' && a !== 'post-del') S.arm = null;
+    if (a === 'menu') { S.menu = true; renderLayer(); }
+    else if (a === 'close') { var was = S.sheet; S.menu = false; S.sheet = null; renderLayer(); var back = was && pageEl.querySelector('[data-id="' + (was.indexOf('post:') === 0 ? was.slice(5) : was) + '"]'); if (back) back.focus({ preventScroll: true }); }
+    else if (a === 'nav') { S.menu = false; renderLayer(); }
+    else if (a === 'sheet') { S.sheet = id; renderLayer(); }
+    else if (a === 'post') { S.sheet = 'post:' + id; renderLayer(); }
+    else if (a === 'view') { S.view = id; store(VIEW_KEY, id); renderPage(); scrollTo(0, 0); }
+    else if (a === 'mail') { if (!directMail()) { e.preventDefault(); S.menu = false; S.sheet = 'mail'; renderLayer(); } }
+    else if (a === 'copy') { var el = document.getElementById(t.getAttribute('data-target') || 'mailAddr'); var txt = el.textContent; var sel = function(){ var r = document.createRange(); r.selectNodeContents(el); var w = getSelection(); w.removeAllRanges(); w.addRange(r); t.textContent = '選択しました'; }; if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ t.textContent = 'コピーしました'; }, sel); else sel(); }
+  });
+  document.addEventListener('keydown', function(e){ if (e.key !== 'Escape') return; if (S.sheet || S.menu) { S.sheet = null; S.menu = false; renderLayer(); } });
+
+  renderPage(); renderLayer();
+  var hm = /^#post-([\w-]+)$/.exec(location.hash); if (hm && (S.c.posts || []).some(function(p){ return p.id === hm[1]; })) { S.sheet = 'post:' + hm[1]; renderLayer(); }
+
+})();
+</script>
+</body>
+</html>
