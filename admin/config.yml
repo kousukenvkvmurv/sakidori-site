@@ -154,6 +154,23 @@ collections:
 
           - { name: blogEmpty, label: ブログ記事がないときの表示, widget: text }
 
+          - name: social
+            label: SNS（メニューとフッターのアイコン。空欄は非表示）
+            widget: object
+            fields:
+              - { name: line, label: LINE公式アカウントのURL, widget: string, required: false }
+              - { name: instagram, label: InstagramのURL, widget: string, required: false }
+              - { name: ameblo, label: アメブロのURL, widget: string, required: false }
+
+          - name: ibj
+            label: IBJバナー
+            widget: object
+            collapsed: true
+            fields:
+              - { name: img, label: バナー画像のURL, widget: string }
+              - { name: href, label: リンク先, widget: string }
+              - { name: alt, label: 画像の説明, widget: text }
+
           - name: footer
             label: フッター（空欄の項目は非表示）
             widget: object
