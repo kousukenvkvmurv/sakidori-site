@@ -65,10 +65,13 @@ button{font:inherit}
 .concept::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,62,98,.62),rgba(24,62,98,.28))}
 .concept-in{position:relative;z-index:1}
 .concept p{margin:0;font-family:var(--mincho);font-weight:800;text-shadow:0 2px 12px rgba(10,30,50,.55)}
-.ibj-ban{display:flex;justify-content:center}
-.ibj-img{display:block;width:200px;max-width:100%}
-.ibj-img img{width:200px;height:auto;max-width:100%}
-.ibj-fb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:200px;height:200px;max-width:100%;border:1px solid var(--line);border-radius:14px;background:var(--ground);text-decoration:none;text-align:center;padding:16px}
+.ibj-ban{display:flex;justify-content:center;margin-top:36px}
+.pc .ibj-ban{margin-top:48px}
+.ibj-img{display:block;width:160px;max-width:100%;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(30,42,51,.14);transition:transform .2s}
+.ibj-img:hover{transform:translateY(-2px)}
+.pc .ibj-img{width:180px}
+.ibj-img img{display:block;width:100%;height:auto}
+.ibj-fb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:160px;height:160px;max-width:100%;border:1px solid var(--line);border-radius:12px;background:var(--paper);text-decoration:none;text-align:center;padding:16px}
 .ibj-fb b{font-size:16px;color:var(--ink)}
 .ibj-fb span{font-size:12.5px;color:var(--blue)}
 .medal{width:88px;height:88px;border-radius:50%;background:var(--gold-bg);border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--point);font-family:var(--latin);line-height:1;flex:none}
@@ -502,8 +505,7 @@ body{margin:0}
     concept(c) +
     '<section class="sec cando" id="feature"><div class="in"><div class="center" data-rv><p class="eyebrow">FEATURE</p><h2 class="h2">' + br(c.feature.title) + '</h2></div><ol class="steps">' +
       c.feature.steps.map(function(s, i){ return '<li data-rv><div class="medal" aria-hidden="true"><span>step</span><span>' + (i+1) + '</span></div><div><h3>' + br(s.title) + '</h3><p>' + esc(s.text) + '</p></div></li>'; }).join('') +
-    '</ol></div></section>' +
-    '<div class="ibj">' + ibjBanner(c) + '</div>' +
+    '</ol>' + ibjBanner(c) + '</div></section>' +
     '<section class="sec price" id="price"><div class="in"><div class="center" data-rv><p class="eyebrow">PRICE</p><h2 class="h2">料金</h2></div>' + program(c, false) + '<div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="price">サポート内容・くわしくはこちら' + IC.next + '</button></div></div></section>' +
     '<section class="sec flow" id="flow"><div class="in"><div class="center" data-rv><p class="eyebrow">FLOW</p><h2 class="h2">活動の流れ</h2></div><ol class="tl">' +
       c.flow.map(function(f, i){ return '<li data-rv><span class="dot' + (i === c.flow.length - 1 ? ' goal' : '') + '">' + (i+1) + '</span><span>' + esc(f.title) + '</span></li>'; }).join('') +
@@ -531,8 +533,7 @@ body{margin:0}
     concept(c) +
     '<section class="sec cando" id="feature"><div class="wrap"><div class="center" data-rv><p class="eyebrow">FEATURE</p><h2 class="h2">' + esc(c.feature.title.replace(/\n/g, '')) + '</h2></div><div class="grid3">' +
       c.feature.steps.map(function(s, i){ return '<article class="pt" data-rv><div class="medal" aria-hidden="true"><span>step</span><span>' + (i+1) + '</span></div><h3>' + esc(s.title) + '</h3><p>' + esc(s.text) + '</p></article>'; }).join('') +
-    '</div></div></section>' +
-    '<div class="ibj"><div class="wrap">' + ibjBanner(c) + '</div></div>' +
+    '</div>' + ibjBanner(c) + '</div></section>' +
     '<section class="sec price" id="price"><div class="wrap"><div class="center" data-rv><p class="eyebrow">PRICE</p><h2 class="h2">料金</h2></div>' + program(c, true) + '<h3 class="notes-h">料金のご説明</h3>' + priceNotes(c) + '</div></section>' +
     '<section class="sec flow" id="flow"><div class="wrap"><div class="center" data-rv><p class="eyebrow">FLOW</p><h2 class="h2">活動の流れ</h2></div><ol class="fsteps">' +
       c.flow.map(function(f, i){ return '<li data-rv' + (/活動開始/.test(f.title) ? ' class="start"' : '') + '><span class="dot' + (i === c.flow.length - 1 ? ' goal' : '') + '">' + (i+1) + '</span><b>' + esc(f.title) + '</b>' + (f.text ? '<span class="d">' + esc(f.text) + '</span>' : '') + '</li>'; }).join('') +
