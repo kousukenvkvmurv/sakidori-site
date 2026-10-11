@@ -146,10 +146,6 @@
       "a": "21時まで面談OKです。お仕事やプライベートでお忙しい方でも活動していただけます。"
     },
     {
-      "q": "入会できるのはどんな人ですか？",
-      "a": "20代・30代で、結婚後にお子さまを希望される方に限らせていただいております。"
-    },
-    {
       "q": "お見合いのたびに費用はかかりますか？",
       "a": "お見合い料は無料です。"
     },
@@ -256,5 +252,10 @@
     "counselor": "/images/counselor.jpg",
     "seated": "/images/seated.jpg",
     "eagle": "/images/eagle.jpg"
+  },
+  "social": {
+    "line": "https://line.me/R/ti/p/@853zfnjs",
+    "instagram": "",
+    "ameblo": ""
   }
 }
