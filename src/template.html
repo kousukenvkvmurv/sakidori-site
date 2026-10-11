@@ -93,7 +93,7 @@ button{font:inherit}
 .cmp td.feat{background:#F2F7FB}
 .notes{margin:12px 0 0;padding:0;list-style:none;font-size:13px;color:var(--muted);display:grid;gap:8px}
 .notes b{color:var(--ink2)}
-.dot{width:32px;height:32px;border-radius:50%;background:var(--paper);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:var(--latin);font-size:16px;color:var(--blue);flex:none}
+.dot{box-sizing:border-box;width:36px;height:36px;border-radius:50%;background:var(--paper);border:2px solid var(--blue);display:grid;place-items:center;font-family:'Helvetica Neue',Arial,var(--sans);font-size:15px;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums;color:var(--blue);flex:none;position:relative;z-index:1}
 .dot.goal{background:var(--blue);color:#fff}
 .qa{border-top:1px solid var(--line)}
 .qa details{border-bottom:1px solid var(--line)}
@@ -201,8 +201,8 @@ button{font:inherit}
 .sp .note{margin:16px 0 0;font-size:13px;color:var(--muted);text-align:center}
 .sp .flow{background:var(--paper)}
 .sp .tl{margin:26px 0 0;padding:0;list-style:none;position:relative}
-.sp .tl::before{content:"";position:absolute;left:15px;top:16px;bottom:16px;width:2px;background:var(--line)}
-.sp .tl li{position:relative;display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:center;min-height:44px;font-weight:700}
+.sp .tl::before{content:"";position:absolute;left:17px;top:18px;bottom:18px;width:2px;background:var(--line)}
+.sp .tl li{position:relative;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:center;min-height:48px;font-weight:700}
 .sp .counselor{background:var(--mist)}
 .sp .c-photo{margin-top:22px;border-radius:20px;overflow:hidden}
 .sp .c-photo img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:40% 18%}
@@ -228,6 +228,14 @@ button{font:inherit}
 .drawer-top,.sheet-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:60px;padding:env(safe-area-inset-top,0px) 6px 0 18px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
 .drawer nav{display:flex;flex-direction:column;padding:4px 20px 24px}
 .drawer nav a{display:flex;justify-content:space-between;align-items:center;min-height:58px;border-bottom:1px solid #E3EAEE;color:var(--ink);text-decoration:none;font-family:var(--mincho);font-weight:700;font-size:17px}
+.sns{display:flex;justify-content:center;gap:14px;padding:6px 20px 28px;flex-wrap:wrap}
+.sns a{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:72px;text-decoration:none;color:var(--ink2);font-size:12px;font-weight:700}
+.sns-ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1px solid var(--line);color:var(--blue)}
+.sns-line .sns-ic{background:var(--green);border-color:var(--green);color:#fff}
+.sns-instagram .sns-ic{background:radial-gradient(circle at 30% 110%,#FDCB52 0%,#FD8D32 22%,#E1306C 48%,#C13584 66%,#833AB4 85%,#5B51D8 100%);background-origin:border-box;background-repeat:no-repeat;border:0;color:#fff}
+.sns-ameblo .sns-ic{background:#2D8C3C;border-color:#2D8C3C;color:#fff}
+.sns a:hover .sns-ic,.sns a:active .sns-ic{border-color:var(--blue)}
+.ft .sns{padding:14px 0 4px}
 .drawer nav a span{font-family:var(--latin);font-size:12px;letter-spacing:.14em;color:var(--eyebrow);font-weight:500}
 .sheet{background:var(--paper);padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
 .sheet-top h2{margin:0;font-family:var(--mincho);font-weight:800;font-size:18px}
@@ -239,8 +247,9 @@ button{font:inherit}
 .sheet .cmp-wrap{margin:0 -20px;padding:0 20px}
 .sheet .cmp tbody th{position:sticky;left:0;z-index:1}
 .flow-full{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column}
-.flow-full li{display:grid;grid-template-columns:32px 1fr;gap:12px;padding-bottom:16px;position:relative}
-.flow-full li:not(:last-child)::before{content:"";position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--line)}
+.flow-full li{display:grid;grid-template-columns:36px 1fr;gap:14px;padding-bottom:16px;position:relative}
+.flow-full li:not(:last-child)::before{content:"";position:absolute;left:17px;top:36px;bottom:0;width:2px;background:var(--line)}
+.flow-full b{margin-top:6px!important}
 .flow-full b{display:block;font-size:15px;margin-top:4px}
 .flow-full span.d{display:block;font-size:13.5px;color:var(--muted)}
 
@@ -300,7 +309,7 @@ button{font:inherit}
 .pc .note{margin:18px 0 0;text-align:center;color:var(--muted);font-size:14px}
 .pc .flow{background:var(--ground)}
 .pc .fsteps{margin:52px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px}
-.pc .fsteps li{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.pc .fsteps li{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
 .pc .fsteps li.start{border-color:var(--gold);background:var(--gold-bg)}
 .pc .fsteps b{font-family:var(--mincho);font-size:17px;line-height:1.5}
 .pc .fsteps span.d{font-size:13px;color:var(--muted)}
@@ -318,9 +327,12 @@ button{font:inherit}
 .pc .blog-cards{margin-top:40px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
 .pc .faq{background:var(--ground)}
 .pc .qa{max-width:820px;margin:44px auto 0}
-.pc .contact .wrap{display:flex;flex-wrap:wrap;gap:56px;align-items:center}
-.pc .ct-l{flex:999 1 460px;min-width:0}
-.pc .ct-l .lead{margin:20px 0 0;max-width:34em}
+.pc .contact .wrap{display:flex;flex-wrap:wrap;gap:56px;align-items:center;justify-content:center;text-align:center}
+.pc .contact .lead{margin-left:auto;margin-right:auto}
+.pc .contact .reserve,.pc .contact .addr{margin-left:auto;margin-right:auto}
+.pc .ct-l{flex:0 1 760px;min-width:0}
+.pc .ct-l .lead{margin:20px 0 0;max-width:none}
+.pc .contact .lead .s{display:inline-block}
 .pc .reserve{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;max-width:560px}
 .pc .addr{margin-top:14px;max-width:560px}
 .pc .ct-r{flex:1 1 300px;display:flex;justify-content:center}
@@ -383,6 +395,7 @@ body{margin:0}
   var SKEL = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,sans-serif;background:#fafafa}img{max-width:100%}[hidden]{display:none!important}</style></head><body>';
   var SAVED = JSON.parse(document.getElementById('content').textContent);
   var DEFAULT_STYLE = {sp:{body:15,h2:25,heroLead:19,heroTitle:30,heroSub:16,concept:19,worry:17,step:18,lead:19,price:24},pc:{body:15,h2:36,heroLead:30,heroTitle:56,heroSub:20,concept:30,worry:21,step:23,lead:22,price:30}};
+  if (!SAVED.social) SAVED.social = { line: (SAVED.contact && SAVED.contact.line) || '', instagram: '', ameblo: '' };
   if (!SAVED.program) SAVED.program = { name: 'サキドリ成婚プログラム', sub: '', fees: [], services: [] };
   if (!SAVED.style) SAVED.style = clone(DEFAULT_STYLE);
   if (!SAVED.ibj) SAVED.ibj = {href:'https://www.ibjapan.com/',img:'',alt:''};
@@ -422,6 +435,8 @@ body{margin:0}
     down: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
     mail: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
     line: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 4C7 4 3 7.2 3 11.2c0 3.5 3.1 6.4 7.3 7l-.6 2.6c-.1.4.3.7.7.5L14 18c4.2-.7 7-3.5 7-6.8C21 7.2 17 4 12 4z"/></svg>',
+    cam: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.4h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.4"/></svg>',
+    note: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 10h6M9 14h6M9 18h4"/></svg>',
     pen: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>'
   };
 
@@ -429,9 +444,9 @@ body{margin:0}
   var MAIL_SUBJECT = '無料カウンセリングの予約', MAIL_BODY = 'お名前：\nご希望の日時：\nオンライン／対面：\nご相談内容：\n';
   function mailto(c){ return 'mailto:' + encodeURIComponent(c.contact.email).replace('%40','@') + '?subject=' + encodeURIComponent(MAIL_SUBJECT) + '&body=' + encodeURIComponent(MAIL_BODY); }
   function framed(){ try { return window.self !== window.top; } catch(e){ return true; } }
-  function directMail(){ return !framed() && S.view === 'sp'; }
+  function directMail(){ return !framed(); }
   function reserveBtns(c){
-    return '<a class="rbtn rbtn-mail" data-act="mail" href="' + esc(mailto(c)) + '">' + IC.mail + '<span>メールで予約<small>予約用の文面つき</small></span></a>' +
+    return '<a class="rbtn rbtn-mail" data-act="mail" href="' + esc(mailto(c)) + '">' + IC.mail + '<span>メールで予約</span></a>' +
       '<a class="rbtn rbtn-line" href="' + esc(c.contact.line) + '" target="_blank" rel="noopener">' + IC.line + '<span>LINEで予約<small>公式アカウント</small></span></a>';
   }
   function md(src){
@@ -466,7 +481,8 @@ body{margin:0}
   function supList(c){ return '<ul class="sup">' + c.support.map(function(s){ return '<li><b>' + esc(s.name) + '</b><span>' + esc(s.detail) + '</span></li>'; }).join('') + '</ul>'; }
   function faqList(c){ return '<div class="qa">' + c.faq.map(function(f){ return '<details data-rv><summary>' + esc(f.q) + IC.down + '</summary><div class="a"><p>' + esc(f.a) + '</p></div></details>'; }).join('') + '</div>'; }
   function concept(c){ return '<section class="concept" id="concept" aria-label="メッセージ"><div class="concept-bg" data-parallax><img src="' + IMG.eagle + '" alt=""></div><div class="concept-in">' + c.concept.lines.map(function(l){ return '<p data-rv>' + esc(l) + '</p>'; }).join('') + '</div></section>'; }
-  function ibjBanner(c){ var b = c.ibj || {}; return '<div class="ibj-ban" data-rv><a class="ibj-img" href="' + esc(b.href) + '" target="_blank" rel="noopener"><img src="' + esc(b.img) + '" alt="' + esc(b.alt) + '" width="200" height="200" border="0" onerror="this.parentNode.hidden=true;this.parentNode.nextElementSibling.hidden=false"></a><a class="ibj-fb" href="' + esc(b.href) + '" target="_blank" rel="noopener" hidden><b>IBJ正規加盟店</b><span>日本結婚相談所連盟（IBJ）の公式サイトへ</span></a></div>'; }
+  function ibjBanner(c){ var d = {href:'https://www.ibjapan.com/',img:'https://staic.blob.ibjs.ibjapan.com/ibjsite/banner/bnr_2026_no1_5.webp',alt:'結婚相談所サキドリはお見合い数、会員数、成婚者数No.1であるIBJ正規加盟の結婚相談所です'}; var b = Object.assign({}, d, c.ibj || {}); if (!b.img) b.img = d.img; if (!b.href) b.href = d.href; return '<div class="ibj-ban" data-rv><a class="ibj-img" href="' + esc(b.href) + '" target="_blank" rel="noopener"><img src="' + esc(b.img) + '" alt="' + esc(b.alt) + '" width="200" height="200" border="0" onerror="this.parentNode.hidden=true;this.parentNode.nextElementSibling.hidden=false"></a><a class="ibj-fb" href="' + esc(b.href) + '" target="_blank" rel="noopener" hidden><b>IBJ正規加盟店</b><span>日本結婚相談所連盟（IBJ）の公式サイトへ</span></a></div>'; }
+  function sentences(t){ return String(t || '').split(/(?<=。)/).filter(function(x){ return x.trim(); }).map(function(x){ return '<span class="s">' + esc(x) + '</span>'; }).join(''); }
   function footerAddr(c){ var f = c.footer, parts = []; if (f.address) parts.push(esc(f.address)); if (f.tel) parts.push('TEL ' + esc(f.tel) + (f.hours ? '　受付時間 ' + esc(f.hours) : '')); else if (f.hours) parts.push('受付時間 ' + esc(f.hours)); return parts.length ? '<address>' + parts.join('<br>') + '</address>' : ''; }
   function previewBar(){ return ''; }
   function editPill(){ return ''; }
@@ -486,7 +502,8 @@ body{margin:0}
     concept(c) +
     '<section class="sec cando" id="feature"><div class="in"><div class="center" data-rv><p class="eyebrow">FEATURE</p><h2 class="h2">' + br(c.feature.title) + '</h2></div><ol class="steps">' +
       c.feature.steps.map(function(s, i){ return '<li data-rv><div class="medal" aria-hidden="true"><span>step</span><span>' + (i+1) + '</span></div><div><h3>' + br(s.title) + '</h3><p>' + esc(s.text) + '</p></div></li>'; }).join('') +
-    '</ol><div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="feature">くわしくはこちら' + IC.next + '</button></div></div></section>' +
+    '</ol></div></section>' +
+    '<div class="ibj">' + ibjBanner(c) + '</div>' +
     '<section class="sec price" id="price"><div class="in"><div class="center" data-rv><p class="eyebrow">PRICE</p><h2 class="h2">料金</h2></div>' + program(c, false) + '<div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="price">サポート内容・くわしくはこちら' + IC.next + '</button></div></div></section>' +
     '<section class="sec flow" id="flow"><div class="in"><div class="center" data-rv><p class="eyebrow">FLOW</p><h2 class="h2">活動の流れ</h2></div><ol class="tl">' +
       c.flow.map(function(f, i){ return '<li data-rv><span class="dot' + (i === c.flow.length - 1 ? ' goal' : '') + '">' + (i+1) + '</span><span>' + esc(f.title) + '</span></li>'; }).join('') +
@@ -495,9 +512,9 @@ body{margin:0}
     '<div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="counselor">くわしくはこちら' + IC.next + '</button>' + '' + '</div></div></section>' +
     '<section class="sec blog" id="blog"><div class="in"><div class="center" data-rv><p class="eyebrow">BLOG</p><h2 class="h2">ブログ</h2></div>' + (ps.length ? blogCards(ps.slice(0, 5)) : blogEmpty(c)) + (ps.length > 5 ? '<div class="more-row"><button class="more-btn" type="button" data-act="sheet" data-id="blog">記事一覧' + IC.next + '</button></div>' : '') + '</div></section>' +
     '<section class="sec faq" id="faq"><div class="in"><div class="center" data-rv><p class="eyebrow">FAQ</p><h2 class="h2">よくあるご質問</h2></div>' + faqList(c) + '</div></section>' +
-    '<section class="sec contact" id="contact"><div class="in"><p class="eyebrow">CONTACT</p><h2 class="h2">' + br(c.contact.title) + '</h2><p class="lead">' + esc(c.contact.lead) + '</p><div class="reserve">' + reserveBtns(c) + '</div><div class="addr"><code id="mailAddr">' + esc(c.contact.email) + '</code><button type="button" data-act="copy">コピー</button></div></div></section>' +
+    '<section class="sec contact" id="contact"><div class="in"><p class="eyebrow">CONTACT</p><h2 class="h2">' + br(c.contact.title) + '</h2><p class="lead">' + sentences(c.contact.lead) + '</p><div class="reserve">' + reserveBtns(c) + '</div></div></section>' +
     '</main>' +
-    '<footer class="ft"><img src="' + IMG.logo + '" alt="結婚相談所サキドリ"><small>' + esc(c.brandTag) + '</small>' + footerAddr(c) + '<button type="button" class="switch" data-act="view" data-id="pc">パソコン版で表示する</button><div class="copy">© 結婚相談所サキドリ</div></footer>' +
+    '<footer class="ft"><img src="' + IMG.logo + '" alt="結婚相談所サキドリ"><small>' + esc(c.brandTag) + '</small>' + footerAddr(c) + snsLinks(c) + '<button type="button" class="switch" data-act="view" data-id="pc">パソコン版で表示する</button><div class="copy">© 結婚相談所サキドリ</div></footer>' +
     '<div class="bar" role="region" aria-label="' + esc(c.contact.bar) + '"><p class="bar-tab">' + esc(c.contact.bar) + '</p><div class="bar-btns">' + reserveBtns(c) + '</div></div>' +
     '</div>';
   }
@@ -514,7 +531,8 @@ body{margin:0}
     concept(c) +
     '<section class="sec cando" id="feature"><div class="wrap"><div class="center" data-rv><p class="eyebrow">FEATURE</p><h2 class="h2">' + esc(c.feature.title.replace(/\n/g, '')) + '</h2></div><div class="grid3">' +
       c.feature.steps.map(function(s, i){ return '<article class="pt" data-rv><div class="medal" aria-hidden="true"><span>step</span><span>' + (i+1) + '</span></div><h3>' + esc(s.title) + '</h3><p>' + esc(s.text) + '</p></article>'; }).join('') +
-    '</div><div class="detail" data-rv><p>' + esc(c.feature.detail) + '</p>' + supList(c) + '</div></div></section>' +
+    '</div></div></section>' +
+    '<div class="ibj"><div class="wrap">' + ibjBanner(c) + '</div></div>' +
     '<section class="sec price" id="price"><div class="wrap"><div class="center" data-rv><p class="eyebrow">PRICE</p><h2 class="h2">料金</h2></div>' + program(c, true) + '<h3 class="notes-h">料金のご説明</h3>' + priceNotes(c) + '</div></section>' +
     '<section class="sec flow" id="flow"><div class="wrap"><div class="center" data-rv><p class="eyebrow">FLOW</p><h2 class="h2">活動の流れ</h2></div><ol class="fsteps">' +
       c.flow.map(function(f, i){ return '<li data-rv' + (/活動開始/.test(f.title) ? ' class="start"' : '') + '><span class="dot' + (i === c.flow.length - 1 ? ' goal' : '') + '">' + (i+1) + '</span><b>' + esc(f.title) + '</b>' + (f.text ? '<span class="d">' + esc(f.text) + '</span>' : '') + '</li>'; }).join('') +
@@ -522,9 +540,9 @@ body{margin:0}
     '<section class="sec counselor" id="counselor"><div class="wrap"><div class="c-img" data-rv><img src="' + IMG.counselor + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '" loading="lazy"></div><div class="c-body"><p class="eyebrow">COUNSELOR</p><h2 class="h2">代表カウンセラー</h2><p class="c-name">' + esc(c.counselor.role) + '<b>' + esc(c.counselor.name) + '</b></p><p class="c-lead">' + esc(c.counselor.lead) + '</p>' + c.counselor.paragraphs.map(function(p){ return '<p class="c-txt">' + esc(p) + '</p>'; }).join('') + '' + '</div></div></section>' +
     '<section class="sec blog" id="blog"><div class="wrap"><div class="center" data-rv><p class="eyebrow">BLOG</p><h2 class="h2">ブログ</h2></div>' + (ps.length ? blogCards(ps.slice(0, 6)) : blogEmpty(c)) + (ps.length > 6 ? '<div class="more-row" style="justify-content:center"><button class="more-btn" type="button" data-act="sheet" data-id="blog">記事一覧' + IC.next + '</button></div>' : '') + '</div></section>' +
     '<section class="sec faq" id="faq"><div class="wrap"><div class="center" data-rv><p class="eyebrow">FAQ</p><h2 class="h2">よくあるご質問</h2></div>' + faqList(c) + '</div></section>' +
-    '<section class="sec contact" id="contact"><div class="wrap"><div class="ct-l"><p class="eyebrow">CONTACT</p><h2 class="h2">' + br(c.contact.title) + '</h2><p class="lead">' + esc(c.contact.lead) + '</p><div class="reserve">' + reserveBtns(c) + '</div><div class="addr"><code id="mailAddr">' + esc(c.contact.email) + '</code><button type="button" data-act="copy">コピー</button></div></div><div class="ct-r" data-rv><img src="' + IMG.seated + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '" loading="lazy"></div></div></section>' +
+    '<section class="sec contact" id="contact"><div class="wrap"><div class="ct-l"><p class="eyebrow">CONTACT</p><h2 class="h2">' + br(c.contact.title) + '</h2><p class="lead">' + sentences(c.contact.lead) + '</p><div class="reserve">' + reserveBtns(c) + '</div></div></div></section>' +
     '</main>' +
-    '<footer class="ft"><div class="wrap"><img src="' + IMG.logo + '" alt="結婚相談所サキドリ"><small>' + esc(c.brandTag) + '</small>' + footerAddr(c) + '<button type="button" class="switch" data-act="view" data-id="sp">スマホ版で表示する</button><div class="copy">© 結婚相談所サキドリ</div></div></footer>' +
+    '<footer class="ft"><div class="wrap"><img src="' + IMG.logo + '" alt="結婚相談所サキドリ"><small>' + esc(c.brandTag) + '</small>' + footerAddr(c) + snsLinks(c) + '<button type="button" class="switch" data-act="view" data-id="sp">スマホ版で表示する</button><div class="copy">© 結婚相談所サキドリ</div></div></footer>' +
     '</div>';
   }
 
@@ -535,18 +553,24 @@ body{margin:0}
     if (id === 'feature') return sheetFrame('サキドリの特徴', c.feature.steps.map(function(s, i){ return '<h3>step' + (i+1) + '　' + esc(s.title.replace(/\n/g, ' ')) + '</h3><p>' + esc(s.text) + '</p>'; }).join('') + '<h3>目標設定ファーストカウンセリング</h3><p>' + esc(c.feature.detail) + '</p><h3>活動中のサポート</h3>' + supList(c));
     if (id === 'price') return sheetFrame('料金（税込）', '<h3>' + esc(c.program.name) + '</h3>' + program(c, false).replace(' data-rv', '') + '<h3>サポート内容</h3>' + services(c) + '<h3>料金のご説明</h3>' + priceNotes(c));
     if (id === 'flow') return sheetFrame('活動の流れ', '<ol class="flow-full">' + c.flow.map(function(f, i){ return '<li><span class="dot' + (i === c.flow.length - 1 ? ' goal' : '') + '">' + (i+1) + '</span><div><b>' + esc(f.title) + '</b>' + (f.text ? '<span class="d">' + esc(f.text) + '</span>' : '') + '</div></li>'; }).join('') + '</ol><h3>' + esc(c.flowSupportTitle) + '</h3>' + supList(c));
-    if (id === 'counselor') return sheetFrame('カウンセラー紹介', '<img src="' + IMG.seated + '" alt="代表カウンセラー ' + esc(c.counselor.name) + '" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 25%;border-radius:16px"><h3 style="margin-top:20px">' + esc(c.counselor.lead) + '</h3>' + c.counselor.paragraphs.map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '<p style="margin-top:18px;font-weight:700">' + esc(c.counselor.role) + '　' + esc(c.counselor.name) + '</p>');
+    if (id === 'counselor') return sheetFrame('カウンセラー紹介', '<h3>' + esc(c.counselor.lead) + '</h3>' + c.counselor.paragraphs.map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '<p style="margin-top:18px;font-weight:700">' + esc(c.counselor.role) + '　' + esc(c.counselor.name) + '</p>');
     if (id === 'blog') return sheetFrame('ブログ', blogCards(posts(c)));
     if (id === 'mail') return sheetFrame('メールで予約', '<p style="margin-top:0">下の宛先に、予約用の文面を貼り付けて送ってください。「メールアプリを開く」を押すと、宛先と文面が入った状態で開きます。</p><h3>宛先</h3><div class="copy-box"><code id="mailAddrS">' + esc(c.contact.email) + '</code><button type="button" class="mini" data-act="copy" data-target="mailAddrS">コピー</button></div><h3>件名</h3><div class="copy-box"><code id="mailSubj">' + esc(MAIL_SUBJECT) + '</code><button type="button" class="mini" data-act="copy" data-target="mailSubj">コピー</button></div><h3>予約用の文面</h3><div class="copy-box"><code id="mailBody" style="white-space:pre-wrap">' + esc(MAIL_BODY) + '</code><button type="button" class="mini" data-act="copy" data-target="mailBody">コピー</button></div><p style="margin-top:20px"><a class="rbtn rbtn-mail" href="' + esc(mailto(c)) + '">' + IC.mail + '<span>メールアプリを開く</span></a></p>');
     if (id && id.indexOf('post:') === 0) { var p = (c.posts || []).find(function(x){ return x.id === id.slice(5); }); if (p) return sheetFrame('ブログ', '<p style="margin:0;font-size:13px;color:var(--muted)">' + fmtDate(p.date) + '</p><h3 style="margin-top:4px;font-size:22px">' + esc(p.title || '無題') + '</h3>' + (p.image ? '<img class="post-img" src="' + esc(p.image) + '" alt="">' : '') + '<div class="post-body">' + md(p.body) + '</div>'); }
     return '';
+  }
+  function snsLinks(c){
+    var so = c.social || {};
+    var list = [['line', IC.line, 'LINE', so.line || (c.contact && c.contact.line)], ['instagram', IC.cam, 'Instagram', so.instagram], ['ameblo', IC.note, 'アメブロ', so.ameblo]];
+    var html = list.filter(function(x){ return x[3]; }).map(function(x){ return '<a class="sns-' + x[0] + '" href="' + esc(x[3]) + '" target="_blank" rel="noopener"><span class="sns-ic">' + x[1] + '</span><span class="sns-lb">' + x[2] + '</span></a>'; }).join('');
+    return html ? '<div class="sns" aria-label="SNS">' + html + '</div>' : '';
   }
   function renderDrawer(c){
     var ps = posts(c);
     var items = [['#top','ホーム','HOME'],['#feature','サキドリの特徴','FEATURE'],['#price','料金','PRICE'],['#flow','活動の流れ','FLOW'],['#counselor','カウンセラー紹介','COUNSELOR']];
     items.push(['#blog','ブログ','BLOG']);
     items.push(['#faq','よくあるご質問','FAQ'],['#contact','無料カウンセリングのご予約','CONTACT']);
-    return '<div class="drawer" role="dialog" aria-modal="true" aria-label="メニュー"><div class="drawer-top"><span class="brand"><small>' + esc(c.brandTag) + '</small><img src="' + IMG.logo + '" alt=""></span><button class="icon-btn" type="button" data-act="close" aria-label="メニューを閉じる">' + IC.close + '</button></div><nav aria-label="メインメニュー">' + items.map(function(x){ return '<a href="' + x[0] + '" data-act="nav">' + x[1] + '<span>' + x[2] + '</span></a>'; }).join('') + '</nav></div>';
+    return '<div class="drawer" role="dialog" aria-modal="true" aria-label="メニュー"><div class="drawer-top"><span class="brand"><small>' + esc(c.brandTag) + '</small><img src="' + IMG.logo + '" alt=""></span><button class="icon-btn" type="button" data-act="close" aria-label="メニューを閉じる">' + IC.close + '</button></div><nav aria-label="メインメニュー">' + items.map(function(x){ return '<a href="' + x[0] + '" data-act="nav">' + x[1] + '<span>' + x[2] + '</span></a>'; }).join('') + '</nav>' + snsLinks(c) + '</div>';
   }
 
   /* ---------- render ---------- */
